@@ -1,0 +1,64 @@
+@use "../../../scss/variables" as v;
+
+.invoices {
+    padding: 32px 24px;
+    color: v.$snow-white;
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        &-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: -0.75px;
+        }
+        &-amount {
+            color: v.$light-blue;
+            font-size: .8125rem;
+            letter-spacing: -.1px;
+            line-height: 15px;
+        }
+    }
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 18.5px;
+        &-filter {
+            color: v.$white;
+            background-color: transparent;
+            border: none;
+            font-size: 15px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            cursor: pointer;
+            &::after {
+                content: url(../../../assets/images/icon-arrow-down.svg);
+            }
+        }
+        &-create {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            background-color: v.$lavender;
+            color: v.$white;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 24px;
+            padding: 6px 15px 6px 6px;
+            cursor: pointer;
+            img {
+                background-color: v.$white;
+                border-radius: 100%;
+                padding: 11px;
+            }
+        }
+    }
+}
