@@ -1,0 +1,51 @@
+@use "../../../scss/variables" as v;
+
+.header {
+    background-color: v.$night-blue;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__logo {
+        background-color: v.$violet-blue;
+        padding: 1.4375rem;
+        max-height: 72px;
+        border-radius: 0 20px 20px 0;
+        position: relative;
+        overflow: hidden;
+        img {
+            position: relative;
+            z-index: 1;
+        }
+        &::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 0;
+            height: 72px;
+            border-radius: 20px 0 0 0;
+            width: 100%;
+            background-color: v.$lavender;
+        }
+    }
+    &__nav {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        &-theme-btn {
+            background-color: transparent;
+            border: none;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        &-container {
+            padding: 18px 24px;
+            border-left: 1px solid v.$blue-gray-border;
+        }
+        &-image {
+            max-width: 32px;
+            border-radius: 50%;
+        }
+    }
+}

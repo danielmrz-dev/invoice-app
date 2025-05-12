@@ -1,1 +1,6 @@
 @use "./scss/reset";
+@use "./scss/variables" as v;
+
+body {
+    background-color: v.$dark-blue;
+}
