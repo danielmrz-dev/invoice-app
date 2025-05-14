@@ -6,7 +6,7 @@ export interface Invoice {
     paymentTerms: number;
     clientName: string;
     clientEmail: string;
-    status: string;
+    status: InvoiceStatus;
     senderAddress: ISenderAddress;
     clientAddress: IClientAddress;
     items: Item[];
@@ -33,3 +33,5 @@ export interface Item {
     price: number;
     total: number;
 }
+
+export type InvoiceStatus = "pending" | "paid" | "draft";

@@ -1,0 +1,71 @@
+@use "../../../scss/variables" as v;
+@use "../../../scss/mixins" as m;
+
+.invoice {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: v.$night-blue;
+    padding: 1.5625rem;
+    border-radius: 8px;
+    gap: 1.5rem;
+    &__id {
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        line-height: 15px;
+        letter-spacing: -0.2496px;
+        span {
+            color: v.$blue-gray;
+        }
+    }
+    &__name {
+        font-size: 13px;
+        line-height: 15px;
+        letter-spacing: -0.1px;
+        justify-self: end;
+    }
+    &__data {
+        display: grid;
+        gap: 9px;
+        &-date {
+            font-size: 13px;
+            color: v.$light-blue;
+            line-height: 15px;
+            letter-spacing: -0.1px;
+        }
+    }
+    &__status {
+        justify-self: end;
+        text-align: center;
+        width: 104px;
+        background-color: v.$green-opaque;
+        color: v.$green;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 6px;
+        padding: 14px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        &::before {
+            content: '';
+            height: 8px;
+            width: 8px;
+            background-color: v.$green;
+            border-radius: 50%;
+        }
+    }
+}
+
+
+.paid {
+    @include m.statusColor(v.$green, v.$green-opaque)
+}
+.pending {
+    @include m.statusColor(v.$orange, v.$orange-opaque)
+}
+.draft {
+    @include m.statusColor(v.$light-blue, v.$light-blue-opaque)
+}

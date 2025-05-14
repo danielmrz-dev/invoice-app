@@ -1,0 +1,16 @@
+<div class="invoice">
+    <strong class="invoice__id">
+        <span>#</span>{{ id }}
+    </strong>
+    <span class="invoice__name">
+        {{ clientName }}
+    </span>
+    <div class="invoice__data">
+        <span class="invoice__data-date">Due {{ date }}</span>
+        <strong class="invoice__data-value">£ {{ value }}</strong>
+    </div>
+    <div statusColorDirective [currentStatus]="status" class="invoice__status">
+        <span class="invoice__status-circle"></span>
+        {{ status | titlecase }}
+    </div>
+</div>

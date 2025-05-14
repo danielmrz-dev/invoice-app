@@ -16,6 +16,17 @@
     </div>
 
     <ul class="invoices__list">
-
+        @for (invoice of invoices$ | async; track $index) {
+            <app-invoice
+                [id]="invoice.id"
+                [clientName]="invoice.clientName"
+                [date]="invoice.createdAt"
+                [value]="invoice.total"
+                [status]="invoice.status"
+            ></app-invoice>
+        } @empty {
+            
+        }
+        
     </ul>
 </section>

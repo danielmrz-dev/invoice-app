@@ -1,0 +1,9 @@
+@use "./variables" as v;
+
+@mixin statusColor($color, $opaqueColor) {
+    background-color: $opaqueColor;
+    color: $color;
+    &::before {
+        background-color: $color;
+    }
+}
