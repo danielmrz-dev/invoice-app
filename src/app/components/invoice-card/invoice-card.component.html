@@ -1,4 +1,4 @@
-<div class="invoice">
+<div class="invoice" [routerLink]="['/view-invoice', id]">
     <strong class="invoice__id">
         <span>#</span>{{ id }}
     </strong>
@@ -6,8 +6,12 @@
         {{ clientName }}
     </span>
     <div class="invoice__data">
-        <span class="invoice__data-date">Due {{ date }}</span>
-        <strong class="invoice__data-value">£ {{ value }}</strong>
+        <span class="invoice__data-date">
+            Due {{ date | date : "d MMM y" }}
+        </span>
+        <strong class="invoice__data-value">
+            {{ value | currency : "GBP" : "£ " }}
+        </strong>
     </div>
     <div statusColorDirective [currentStatus]="status" class="invoice__status">
         <span class="invoice__status-circle"></span>

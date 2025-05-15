@@ -2,7 +2,9 @@
     <div class="invoices__header">
         <div class="invoices__info">
             <strong class="invoices__info-title">Invoices</strong>
-            <span class="invoices__info-amount">7 invoices</span>
+            <span class="invoices__info-amount">
+                {{ invoicesAmount | invoicesAmount }}
+            </span>
         </div>
         <div class="invoices__actions">
             <button class="invoices__actions-filter">
@@ -17,15 +19,26 @@
 
     <ul class="invoices__list">
         @for (invoice of invoices$ | async; track $index) {
-            <app-invoice
+            <app-invoice-card
                 [id]="invoice.id"
                 [clientName]="invoice.clientName"
                 [date]="invoice.createdAt"
                 [value]="invoice.total"
                 [status]="invoice.status"
-            ></app-invoice>
+            ></app-invoice-card>
         } @empty {
-            
+            <div class="invoices__list-empty">
+                <img src="illustration-empty.svg" alt="">
+                <div class="invoices__list-empty-text">
+                    <h3 class="invoices__list-empty-title">
+                        There is nothing here
+                    </h3>
+                    <p class="invoices__list-empty-paragraph">
+                        Create an invoice by clicking the
+                        <strong>New</strong> button and get started
+                    </p>
+                </div>
+            </div>
         }
         
     </ul>

@@ -1,4 +1,4 @@
-import { Invoice } from "../app/models/invoice.interface";
+import { Invoice } from "../app/shared/models/invoice.interface";
 
 export const invoices: Invoice[] = [
   {

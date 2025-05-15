@@ -8,6 +8,11 @@
     padding: 1.5625rem;
     border-radius: 8px;
     gap: 1.5rem;
+    cursor: pointer;
+    transition: background .4s ease;
+    &:hover {
+        background-color: v.$night-blue-hover;
+    }
     &__id {
         font-size: 15px;
         font-weight: bold;
