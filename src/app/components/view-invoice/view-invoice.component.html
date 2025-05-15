@@ -3,11 +3,116 @@
         Go back
     </button>
 
-    <div class="view-invoice__status">
-        
-    </div>
+    <ng-container *ngIf="invoice; else noInvoiceFound">
 
-    <div class="view-invoice__info">
+        <div class="view-invoice__info-container" *ngIf="invoice">
 
-    </div>
+            <div class="view-invoice__status">
+                <p>Status</p>
+                <app-status-colored-tag [status]="invoice.status" />
+            </div>
+
+            <div class="view-invoice__info">
+
+                <div class="view-invoice__info-data">
+
+                    <div class="view-invoice__client-info-data-id-and-description">
+                        <span class="view-invoice__info-data-id">
+                            #{{ invoice.id }}
+                        </span>
+                        <span class="view-invoice__info-data-description">
+                            {{ invoice.description }}
+                        </span>
+                    </div>
+
+                    <ul class="view-invoice__info-data-address">
+                        <li class="view-invoice__info-data-address-item"
+                            *ngFor="let key of invoice.senderAddress | keyvalue">
+                            {{ key.value }}
+                        </li>
+                    </ul>
+
+                    <div class="view-invoice__client">
+
+                        <div class="view-invoice__client-info invoice-date">
+                            <span class="view-invoice__client-info-title">
+                                Invoice Date
+                            </span>
+                            <span class="view-invoice__client-info-data">
+                                {{ invoice.createdAt | date : 'dd MMM y' }}
+                            </span>
+                        </div>
+
+                        <div class="view-invoice__client-info bill-to">
+                            <span class="view-invoice__client-info-title">
+                                Bill to
+                            </span>
+                            <span class="view-invoice__client-info-data">
+                                {{ invoice.clientName }}
+                            </span>
+
+                            <ul>
+                                <span class="view-invoice__client-info-data-address"
+                                    *ngFor="let key of invoice.clientAddress | keyvalue">
+                                    {{ key.value || 'Not available' }}
+                                </span>
+                            </ul>
+                        </div>
+
+                        <div class="view-invoice__client-info payment-due">
+                            <span class="view-invoice__client-info-title">
+                                Payment Due
+                            </span>
+                            <span class="view-invoice__client-info-data">
+                                {{ invoice.paymentDue | date : 'dd MMM y' }}
+                            </span>
+                        </div>
+
+                        <div class="view-invoice__client-info sent-to">
+                            <span class="view-invoice__client-info-title">
+                                Sent to
+                            </span>
+                            <span class="view-invoice__client-info-data">
+                                {{ invoice.clientEmail || 'Not available' }}
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="view-invoice__summary">
+                        <div class="view-invoice__summary-items">
+                            <div class="view-invoice__summary-item"
+                                *ngFor="let item of invoice.items">
+                                <span class="view-invoice__summary-item-name">
+                                    {{ item.name }}
+                                </span>
+                                <span class="view-invoice__summary-item-price">
+                                    {{ item.quantity }} x {{ item.price | currency : 'GBP' : '£ ' }}
+                                </span>
+                                <span class="view-invoice__summary-item-total"> 
+                                    {{ item.total | currency : 'GBP' : '£ ' }} 
+                                </span>
+                            </div>
+                        </div>
+                        <div class="view-invoice__summary-total">
+                            <span class="view-invoice__summary-total-title">
+                                Amount due
+                            </span>
+                            <span class="view-invoice__summary-total-price">
+                                {{ invoice.total | currency : 'GBP' : '£ ' }}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #noInvoiceFound>
+        <div class="view-invoice__not-found">
+            No invoice with ID <strong>#{{ idNotFound }}</strong> was found.
+        </div>
+    </ng-template>
 </section>

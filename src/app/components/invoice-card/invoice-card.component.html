@@ -1,4 +1,4 @@
-<div class="invoice" [routerLink]="['/view-invoice', id]">
+<li class="invoice" [routerLink]="['/view-invoice', id]">
     <strong class="invoice__id">
         <span>#</span>{{ id }}
     </strong>
@@ -13,8 +13,5 @@
             {{ value | currency : "GBP" : "£ " }}
         </strong>
     </div>
-    <div statusColorDirective [currentStatus]="status" class="invoice__status">
-        <span class="invoice__status-circle"></span>
-        {{ status | titlecase }}
-    </div>
-</div>
+    <app-status-colored-tag [status]="status"/>
+</li>

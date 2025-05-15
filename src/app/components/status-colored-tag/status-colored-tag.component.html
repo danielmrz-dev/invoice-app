@@ -1,1 +1,4 @@
-<p>status-colored-tag works!</p>
+<div statusColorDirective [currentStatus]="status" class="status-tag">
+    <span class="status-tag__circle"></span>
+    {{ status | titlecase }}
+</div>
