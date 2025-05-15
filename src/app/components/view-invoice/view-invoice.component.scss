@@ -134,6 +134,7 @@
             font-weight: bold;
             &-name {
                 grid-area: 1 / 1;
+                white-space: nowrap;
             }
             &-price {
                 grid-area: 2 / 1;
