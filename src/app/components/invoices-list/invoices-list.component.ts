@@ -5,13 +5,12 @@ import { Invoice } from '../../shared/models/invoice.interface';
 import { CommonModule } from '@angular/common';
 import { InvoicesAmountPipe } from '../../shared/pipes/invoices-amount.pipe';
 import { InvoiceCardComponent } from "../invoice-card/invoice-card.component";
-import { RouterLink } from '@angular/router';
 import { SidenavService } from '../../shared/services/sidenav.service';
 
 @Component({
   selector: 'app-invoices-list',
   standalone: true,
-  imports: [InvoiceCardComponent, CommonModule, InvoicesAmountPipe, InvoiceCardComponent, RouterLink],
+  imports: [InvoiceCardComponent, CommonModule, InvoicesAmountPipe, InvoiceCardComponent],
   templateUrl: './invoices-list.component.html',
   styleUrl: './invoices-list.component.scss'
 })

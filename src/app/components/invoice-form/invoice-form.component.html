@@ -1,1 +1,73 @@
-<p>invoice-form works!</p>
+<aside class="wrapper">
+    <button class="go-back-btn" (click)="closeSidenav()">
+        Go back
+    </button>
+
+    <form class="form" [formGroup]="form">
+        <h3 class="form__title">New Invoice</h3>
+        <div class="form__bill-from" formGroupName="billFrom">
+            <span class="form__section-title">Bill from</span>
+            <div class="form__bill-from-inputs">
+                <label class="form__label form__bill-from-label" for="street">
+                    Street Address
+                    <input class="form__input" type="text" id="street" formControlName="street">
+                </label>
+
+                <label class="form__label form__bill-from-label" for="city">
+                    City
+                    <input class="form__input" type="text" id="city" formControlName="city">
+                </label>
+
+                <label class="form__label form__bill-from-label" for="postCode">
+                    Post Code
+                    <input class="form__input" type="text" id="postCode" formControlName="postCode">
+                </label>
+
+                <label class="form__label form__bill-from-label" for="country">
+                    Country
+                    <input class="form__input" type="text" id="country" formControlName="country">
+                </label>
+            </div>
+        </div>
+
+        <div class="form__bill-to" formGroupName="billTo">
+            <span class="form__section-title">Bill to</span>
+            <div class="form__bill-to-inputs">
+                <label class="form__label form__bill-to-label" for="clientName">
+                    Client's name
+                    <input class="form__input" type="text" id="clientName" formControlName="clientName">
+                </label>
+                <label class="form__label form__bill-to-label" for="clientEmail">
+                    Client's email
+                    <input class="form__input" type="text" id="clientEmail" formControlName="clientEmail">
+                </label>
+                <label class="form__label form__bill-to-label" for="city">
+                    City
+                    <input class="form__input" type="text" id="city" formControlName="city">
+                </label>
+                <label class="form__label form__bill-to-label" for="postCode">
+                    Post Code
+                    <input class="form__input" type="text" id="postCode" formControlName="postCode">
+                </label>
+                <label class="form__label form__bill-to-label" for="country">
+                    Country
+                    <input class="form__input" type="text" id="country" formControlName="country">
+                </label>
+                <label class="form__label form__bill-to-label" for="invoiceDate">
+                    Invoice date
+                    <input class="form__input" type="text" id="invoiceDate" formControlName="invoiceDate">
+                </label>
+                <label class="form__label form__bill-to-label" for="paymentTerms">
+                    Payment Terms
+                    <input class="form__input" type="text" id="paymentTerms" formControlName="paymentTerms">
+                </label>
+                <label class="form__label form__bill-to-label" for="projectDescription">
+                    Project description
+                    <input class="form__input" type="text" id="projectDescription" formControlName="projectDescription">
+                </label>
+            </div>
+        </div>
+
+    </form>
+
+</aside>

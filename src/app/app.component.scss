@@ -1,18 +1,13 @@
 @use "../scss/variables" as v;
 
 .example-container {
-  width: 100%;
+  min-width: 100%;
   height: calc(100% - 72px);
   background-color: v.$dark-blue;
 }
 
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
-.example-sidenav {
-  padding: 20px;
+.sidenav {
+  width: 100%;
+  background-color: v.$dark-blue;
+  padding: 1.5rem;
 }

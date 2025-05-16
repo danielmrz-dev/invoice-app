@@ -1,7 +1,7 @@
 <app-header></app-header>
 <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="over" position="start">
-        Olá
+    <mat-sidenav opened class="sidenav" #sidenav mode="over" position="start">
+        <app-invoice-form></app-invoice-form>
     </mat-sidenav>
     <router-outlet></router-outlet>        
 </mat-sidenav-container>
