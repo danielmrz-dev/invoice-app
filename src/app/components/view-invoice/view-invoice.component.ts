@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class ViewInvoiceComponent implements OnInit {
 
   invoice!: Invoice | undefined;
-  idNotFound: string = '';
+  idNotFound: string | null = '';
 
   constructor(
     private readonly invoicesService: InvoicesService,
@@ -27,7 +27,9 @@ export class ViewInvoiceComponent implements OnInit {
       this.activatedRoute.paramMap.pipe(
         concatMap(
           (params) => {
-            this.idNotFound = params.get('id')!;
+            if (params.get('id')) {
+              this.idNotFound = params.get('id');              
+            }
             return this.invoicesService.getInvoiceById(params.get('id'))
           }
         )

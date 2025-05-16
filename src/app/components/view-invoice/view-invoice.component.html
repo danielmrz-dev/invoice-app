@@ -108,6 +108,18 @@
 
             </div>
         </div>
+
+        <div class="view-invoice__actions">
+            <button class="view-invoice__actions-btn-edit" [routerLink]="['/edit-invoice', invoice.id]">
+                Edit
+            </button>
+            <button class="view-invoice__actions-btn-delete">
+                Delete
+            </button>
+            <button class="view-invoice__actions-btn-mark-as-paid">
+                Mark as paid
+            </button>
+        </div>
     </ng-container>
 
     <ng-template #noInvoiceFound>

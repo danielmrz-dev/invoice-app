@@ -1,23 +1,13 @@
 @use "../../../scss/variables" as v;
+@use "../../../scss/mixins" as m;
 
 .view-invoice {
-    margin: 2.0625rem 1.5rem;
+    margin: 2.0625rem 0 0;
     display: flex;
     flex-direction: column;
     gap: 1.9375rem;
     &__go-back-btn {
-        font-size: 15px;
-        font-weight: bold;
-        color: v.$white;
-        background-color: transparent;
-        border: none;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        cursor: pointer;
-        &::before {
-            content: url(../../../assets/images/icon-arrow-left.svg);
-        }
+        @include m.goBackBtn();
     }
     &__status {
         background-color: v.$night-blue;
@@ -37,6 +27,7 @@
         flex-direction: column;
         gap: 1rem;
         color: v.$light-blue;
+        margin: 0 1.5rem;
     }
     &__info {
         background-color: v.$night-blue;
@@ -160,6 +151,24 @@
                 font-size: 1.5rem;
                 line-height: 32px;
                 font-weight: bold;
+            }
+        }
+    }
+    &__actions {
+        background-color: v.$night-blue;
+        padding: 1.3125rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &-btn {
+            &-edit {
+                @include m.actionBtnColors(v.$night-blue-hover)
+            }
+            &-delete {
+                @include m.actionBtnColors(v.$coral-red)
+            }
+            &-mark-as-paid {
+                @include m.actionBtnColors(v.$violet-blue)
             }
         }
     }

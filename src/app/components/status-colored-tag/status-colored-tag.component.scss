@@ -26,11 +26,11 @@
 }
 
 .paid {
-    @include m.statusColor(v.$green, v.$green-opaque)
+    @include m.statusTagColor(v.$green, v.$green-opaque)
 }
 .pending {
-    @include m.statusColor(v.$orange, v.$orange-opaque)
+    @include m.statusTagColor(v.$orange, v.$orange-opaque)
 }
 .draft {
-    @include m.statusColor(v.$light-blue, v.$light-blue-opaque)
+    @include m.statusTagColor(v.$light-blue, v.$light-blue-opaque)
 }

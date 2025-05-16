@@ -1,9 +1,38 @@
 @use "./variables" as v;
 
-@mixin statusColor($color, $opaqueColor) {
+@mixin statusTagColor($color, $opaqueColor) {
     background-color: $opaqueColor;
     color: $color;
     &::before {
         background-color: $color;
+    }
+}
+
+@mixin actionBtnColors($bgColor) {
+    background-color: $bgColor;
+    padding: 1.125rem 1.5rem .9375rem;
+    border-radius: 24px;
+    border: none;
+    color: v.$light-blue;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 15px;
+    letter-spacing: -0.25px;
+    cursor: pointer;
+}
+
+@mixin goBackBtn() {
+    font-size: 15px;
+    font-weight: bold;
+    color: v.$white;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 0 1.5rem;
+    cursor: pointer;
+    &::before {
+        content: url(../assets/images/icon-arrow-left.svg);
     }
 }
