@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { InvoicesAmountPipe } from '../../shared/pipes/invoices-amount.pipe';
 import { InvoiceCardComponent } from "../invoice-card/invoice-card.component";
 import { RouterLink } from '@angular/router';
+import { SidenavService } from '../../shared/services/sidenav.service';
 
 @Component({
   selector: 'app-invoices-list',
@@ -20,7 +21,10 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
   invoicesAmount: number = 0;
   invoicesAmountSub!: Subscription;
 
-  constructor(private readonly invoicesService: InvoicesService) { }
+  constructor(
+    private readonly invoicesService: InvoicesService,
+    private readonly sidenavService: SidenavService
+  ) {}
 
   ngOnInit(): void {
     this.invoices$ = this.invoicesService.getInvoicesList();
@@ -32,5 +36,8 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.invoicesAmountSub.unsubscribe();
   }
-
+  
+  openSidenav() {
+    this.sidenavService.toggleSidenav();
+  }
 }

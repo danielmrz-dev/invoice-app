@@ -110,7 +110,7 @@
         </div>
 
         <div class="view-invoice__actions">
-            <button class="view-invoice__actions-btn-edit" [routerLink]="['/edit-invoice', invoice.id]">
+            <button class="view-invoice__actions-btn-edit" (click)="openEditForm()">
                 Edit
             </button>
             <button class="view-invoice__actions-btn-delete">
