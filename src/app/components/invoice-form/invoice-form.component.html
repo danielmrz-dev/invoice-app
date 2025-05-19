@@ -4,7 +4,12 @@
     </button>
 
     <form class="form" [formGroup]="form">
-        <h3 class="form__title">New Invoice</h3>
+        <h3 class="form__title" *ngIf="formType === 'create'">
+            New invoice
+        </h3>
+        <h3 class="form__title" *ngIf="formType === 'edit'">
+            Edit <span>#</span>{{ invoiceId }}
+        </h3>
         <div class="form__bill-from" formGroupName="billFrom">
             <span class="form__section-title">Bill from</span>
             <div class="form__bill-from-inputs">
@@ -71,9 +76,11 @@
         <ul class="form__items-list" formArrayName="itemsList">
             <span class="form__section-title">Items</span>
             <li class="form__items-list-item" 
-                *ngFor="let item of items.controls; let i = index">
-                <label class="form__label form__items-list-label" for="item-{{ i }}">
-                    Item Name
+                *ngFor="let item of items.controls; let i = index" formGroupName="items">
+                <label 
+                    class="form__label form__items-list-label" 
+                    for="item-{{ i }}">
+                        Item Name
                     <input class="form__input" type="text" id="item-{{ i }}" [formControlName]="i">
                 </label>
                 <div class="form__items-list-item-info">
@@ -102,7 +109,10 @@
         </ul>
 
         <div class="form__actions">
-            <button class="form__actions-discard">Discard</button>
+            <button class="form__actions-discard"
+                (click)="discardChangesAndClose()">
+                Discard
+            </button>
             <button class="form__actions-draft">Save as Draft</button>
             <button class="form__actions-save">Save & Send</button>
         </div>

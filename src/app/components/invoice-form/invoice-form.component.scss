@@ -5,12 +5,12 @@
 
 .go-back-btn {
     @include m.goBackBtn();
-    padding: 1.5rem 1.5rem 0 1.5rem;
+    padding: 1.5rem;
     margin: 0;
 }
 
 .form {
-    margin: 1.625rem auto 0;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 22px;
@@ -19,6 +19,9 @@
         font-size: 1.5rem;
         line-height: 2rem;
         padding: 0 1.5rem;
+        span {
+            color: v.$blue-gray;
+        }
     }
     &__label {
         font-size: .8125rem;

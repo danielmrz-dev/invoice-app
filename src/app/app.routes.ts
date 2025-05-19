@@ -15,6 +15,7 @@ export const routes: Routes = [
     },
     { 
         path: 'edit-invoice/:id', 
+        outlet: 'sidenav',
         loadComponent: () => import('../app/components/invoice-form/invoice-form.component').then(c => c.InvoiceFormComponent),
         title: 'Edit invoice',
         data: {
@@ -23,8 +24,9 @@ export const routes: Routes = [
     },
     { 
         path: 'new-invoice', 
+        outlet: 'sidenav',
         loadComponent: () => import('../app/components/invoice-form/invoice-form.component').then(c => c.InvoiceFormComponent),
-        title: 'Edit invoice',
+        title: 'New invoice',
         data: {
             form: 'create'
         }

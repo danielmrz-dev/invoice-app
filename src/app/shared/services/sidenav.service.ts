@@ -15,4 +15,8 @@ export class SidenavService {
   toggleSidenav(): void {
     this.sidenav.toggle();
   }
+  
+  closeSidenav() {
+    this.sidenav.close();
+  }
 }

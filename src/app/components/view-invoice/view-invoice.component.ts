@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StatusColoredTagComponent } from "../status-colored-tag/status-colored-tag.component";
 import { InvoicesService } from '../../shared/services/invoices.service';
 import { Invoice } from '../../shared/models/invoice.interface';
@@ -21,6 +21,7 @@ export class ViewInvoiceComponent implements OnInit {
 
   constructor(
     private readonly invoicesService: InvoicesService,
+    private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly sidenavService: SidenavService
   ) {}
@@ -43,6 +44,9 @@ export class ViewInvoiceComponent implements OnInit {
   }
 
   openEditForm() {
+    this.router.navigate([
+      { outlets: { sidenav: ['edit-invoice', this.invoice?.id] } }
+    ]);
     this.sidenavService.toggleSidenav();
   }
 }

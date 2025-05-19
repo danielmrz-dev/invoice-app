@@ -1,8 +1,7 @@
 <app-header></app-header>
 <mat-sidenav-container class="example-container">
-    <mat-sidenav opened class="sidenav" #sidenav mode="over" position="start">
-        <app-invoice-form></app-invoice-form>
+    <mat-sidenav class="sidenav" #sidenav mode="over" position="start">
+        <router-outlet name="sidenav"></router-outlet>
     </mat-sidenav>
-    <router-outlet></router-outlet>        
+    <router-outlet></router-outlet>
 </mat-sidenav-container>
-

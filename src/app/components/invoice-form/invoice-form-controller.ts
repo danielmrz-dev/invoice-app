@@ -7,24 +7,22 @@ export class InvoiceFormController {
     constructor(readonly fb: FormBuilder) {
         this.form = fb.group({
             billFrom: fb.group({
-                street: fb.control('19 Union Terrace', []),
-                city: fb.control('London', []),
-                postCode: fb.control('E1 3EZ', []),
-                country: fb.control('United Kingdom', []),
+                street: fb.control('', []),
+                city: fb.control('', []),
+                postCode: fb.control('', []),
+                country: fb.control('', []),
             }),
             billTo: fb.group({
-                clientName: fb.control('fulanin', []),
-                clientEmail: fb.control('fulanin@teste.com', []),
-                city: fb.control('London', []),
-                postCode: fb.control('E1 3EZ', []),
-                country: fb.control('United Kingdom', []),
-                invoiceDate: fb.control('2020-05-20', []),
-                paymentTerms: fb.control('Next 30 days', []),
-                projectDescription: fb.control('Graphic Design', []),
+                clientName: fb.control('', []),
+                clientEmail: fb.control('', []),
+                city: fb.control('', []),
+                postCode: fb.control('', []),
+                country: fb.control('', []),
+                invoiceDate: fb.control('', []),
+                paymentTerms: fb.control('', []),
+                projectDescription: fb.control('', []),
             }),
-            itemsList: fb.array([
-                new FormControl('')
-            ])
+            itemsList: fb.array([])
         })
     }
 
@@ -40,7 +38,55 @@ export class InvoiceFormController {
         return this.form.get('billFrom.street') as FormControl;
     }
 
+    get city(): FormControl {
+        return this.form.get('billFrom.city') as FormControl;
+    }
+
+    get postCode(): FormControl {
+        return this.form.get('billFrom.postCode') as FormControl;
+    }
+
+    get country(): FormControl {
+        return this.form.get('billFrom.country') as FormControl;
+    }
+
+    get clientName(): FormControl {
+        return this.form.get('billTo.clientName') as FormControl;
+    }
+
+    get clientEmail(): FormControl {
+        return this.form.get('billTo.clientEmail') as FormControl;
+    }
+
+    get clientCity(): FormControl {
+        return this.form.get('billTo.clientCity') as FormControl;
+    }
+
+    get clientPostCode(): FormControl {
+        return this.form.get('billTo.clientPostCode') as FormControl;
+    }
+
+    get clientCountry(): FormControl {
+        return this.form.get('billTo.clientCountry') as FormControl;
+    }
+
+    get invoiceDate(): FormControl {
+        return this.form.get('billTo.invoiceDate') as FormControl;
+    }
+
+    get paymentTerms(): FormControl {
+        return this.form.get('billTo.paymentTerms') as FormControl;
+    }
+
+    get projectDescription(): FormControl {
+        return this.form.get('billTo.projectDescription') as FormControl;
+    }
+
     get items(): FormArray {
         return this.form.get('itemsList') as FormArray;
+    }
+
+    get item(): FormControl {
+        return this.form.get('itemsList.item') as FormControl;
     }
 }
