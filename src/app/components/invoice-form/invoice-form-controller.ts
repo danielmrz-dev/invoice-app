@@ -1,4 +1,4 @@
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 
 export class InvoiceFormController {
 
@@ -22,11 +22,25 @@ export class InvoiceFormController {
                 paymentTerms: fb.control('Next 30 days', []),
                 projectDescription: fb.control('Graphic Design', []),
             }),
-            itemsList: fb.array([])
+            itemsList: fb.array([
+                new FormControl('')
+            ])
         })
+    }
+
+    addNewItem() {
+        this.items.push(new FormControl(''));
+    }
+
+    removeItem(index: number) {
+        this.items.removeAt(index);
     }
 
     get street(): FormControl {
         return this.form.get('billFrom.street') as FormControl;
+    }
+
+    get items(): FormArray {
+        return this.form.get('itemsList') as FormArray;
     }
 }

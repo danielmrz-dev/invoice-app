@@ -68,6 +68,44 @@
             </div>
         </div>
 
+        <ul class="form__items-list" formArrayName="itemsList">
+            <span class="form__section-title">Items</span>
+            <li class="form__items-list-item" 
+                *ngFor="let item of items.controls; let i = index">
+                <label class="form__label form__items-list-label" for="item-{{ i }}">
+                    Item Name
+                    <input class="form__input" type="text" id="item-{{ i }}" [formControlName]="i">
+                </label>
+                <div class="form__items-list-item-info">
+                    <label class="form__label" for="qty">
+                        Qty.
+                        <input class="form__input" type="text" id="qty">
+                    </label>
+                    <label class="form__label" for="price">
+                        Price
+                        <input class="form__input" type="text" id="price">
+                    </label>
+                    <div class="form__label total">
+                        Total
+                        <strong>400.00</strong>
+                    </div>
+                    <button class="form__items-list-remove-btn" 
+                        (click)="removeItem(i)">
+                        <img src="icon-delete.svg" alt="">
+                    </button>
+                </div>
+            </li>
+            <button class="form__items-list-item-add-new" 
+                (click)="addNewItem()">
+                + Add New Item
+            </button>
+        </ul>
+
+        <div class="form__actions">
+            <button class="form__actions-discard">Discard</button>
+            <button class="form__actions-draft">Save as Draft</button>
+            <button class="form__actions-save">Save & Send</button>
+        </div>
     </form>
 
 </aside>
