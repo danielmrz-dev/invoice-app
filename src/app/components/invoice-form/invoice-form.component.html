@@ -65,7 +65,12 @@
                 </label>
                 <label class="form__label form__bill-to-label" for="paymentTerms">
                     Payment Terms
-                    <input class="form__input" type="text" id="paymentTerms" formControlName="paymentTerms">
+                    <img src="icon-arrow-down.svg" alt="">
+                    <select class="form__input select" id="paymentTerms" formControlName="paymentTerms">
+                        <option class="form__input-option" value="1">Next day</option>
+                        <option class="form__input-option" value="7">Next 7 days</option>
+                        <option class="form__input-option" value="30">Next 30 days</option>
+                    </select>
                 </label>
                 <label class="form__label form__bill-to-label" for="projectDescription">
                     Project description
@@ -87,16 +92,16 @@
                 <div class="form__items-list-item-info">
                     <label class="form__label" for="qty">
                         Qty.
-                        <input class="form__input" type="text" id="qty" formControlName="quantity">
+                        <input class="form__input" type="number" id="qty" formControlName="quantity">
                     </label>
                     <label class="form__label" for="price">
                         Price
-                        <input class="form__input" type="text" id="price" formControlName="price">
+                        <input class="form__input" type="text" id="price" formControlName="price" mask="separator.2" thousandSeparator=".">
                     </label>
-                    <div class="form__label total">
+                    <label class="form__label" for="total">
                         Total
-                        <input class="form__input" type="text" readonly formControlName="total">
-                    </div>
+                        <input tabindex="-1" class="form__input" type="text" id="total" formControlName="total" readonly>
+                    </label>
                     <button class="form__items-list-remove-btn" 
                         (click)="removeItem(i)">
                         <img src="icon-delete.svg" alt="">

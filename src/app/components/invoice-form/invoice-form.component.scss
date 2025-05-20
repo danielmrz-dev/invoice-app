@@ -30,6 +30,15 @@
         display: flex;
         flex-direction: column;
         gap: 9px;
+        position: relative;
+        img {
+            z-index: 1;
+            width: 15px;
+            position: absolute;
+            bottom: 18px;
+            right: 15px;
+            pointer-events: none;
+        }
     }
     &__input {
         border-radius: .25rem;
@@ -41,8 +50,29 @@
         font-weight: bold;
         line-height: .9375rem;
         width: 100%;
+        &.select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-right: 30px;
+            cursor: pointer;
+
+        }
         &[type="date"] {
             color: transparent;
+            &::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+            }
+        }
+        &[readonly] {
+            background-color: transparent;
+            padding-inline: 0;
+            color: v.$blue-gray;
+            border: none;
+            outline: none;
+        }
+        &-option {
+            font-weight: bold;
         }
     }
     &__section-title {
@@ -121,12 +151,8 @@
                 gap: 16px;
                 .total {
                     align-self: start;
-                    input {
-                        background-color: transparent;
-                        color: v.$blue-gray;
-                        padding-inline: 0;
-                    }
-                    // gap: 25.6px;
+                    gap: 25.6px;
+                    font-weight: bold;
                 }
             }
             &-add-new {

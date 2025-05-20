@@ -1,4 +1,5 @@
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { BehaviorSubject } from "rxjs";
 
 export class InvoiceFormController {
 
@@ -31,11 +32,15 @@ export class InvoiceFormController {
             name: this.fb.control(item?.name || ''),
             quantity: this.fb.control(item?.quantity || 0),
             price: this.fb.control(item?.price || 0),
-            total: this.fb.control(item?.total || 0)
+            total: this.fb.control(item?.total)
         });
         this.items.push(group);
-    }
+        group.valueChanges.subscribe((value) => {
+            const total = value.price * value.quantity;
+            group.get('total')?.setValue(total, { emitEvent: false });
+        });
 
+    }
 
     removeItem(index: number) {
         this.items.removeAt(index);
@@ -93,7 +98,4 @@ export class InvoiceFormController {
         return this.form.get('itemsList') as FormArray;
     }
 
-    // get item(): FormControl {
-    //     return this.form.get('itemsList.item') as FormControl;
-    // }
 }

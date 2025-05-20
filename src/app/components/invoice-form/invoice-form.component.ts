@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { SidenavService } from '../../shared/services/sidenav.service';
 import { InvoiceFormController } from './invoice-form-controller';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { concatMap } from 'rxjs';
 import { FormType } from '../../shared/models/form-type.type';
 import { InvoicesService } from '../../shared/services/invoices.service';
 import { formatDate } from '../../utils/format-date';
+import { NgxMaskDirective } from 'ngx-mask';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatSelectModule],
   templateUrl: './invoice-form.component.html',
   styleUrl: './invoice-form.component.scss'
 })
@@ -57,10 +59,9 @@ export class InvoiceFormComponent extends InvoiceFormController {
             paymentTerms: invoice?.paymentTerms,
             projectDescription: invoice?.description,
           },
-          
         })
         invoice?.items.forEach(item => this.addNewItem(item));
-      }      
+      }
     })
   }
 
