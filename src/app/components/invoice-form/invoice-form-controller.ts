@@ -26,9 +26,16 @@ export class InvoiceFormController {
         })
     }
 
-    addNewItem() {
-        this.items.push(new FormControl(''));
+    addNewItem(item?: any) {
+        const group = this.fb.group({
+            name: this.fb.control(item?.name || ''),
+            quantity: this.fb.control(item?.quantity || 0),
+            price: this.fb.control(item?.price || 0),
+            total: this.fb.control(item?.total || 0)
+        });
+        this.items.push(group);
     }
+
 
     removeItem(index: number) {
         this.items.removeAt(index);
@@ -86,7 +93,7 @@ export class InvoiceFormController {
         return this.form.get('itemsList') as FormArray;
     }
 
-    get item(): FormControl {
-        return this.form.get('itemsList.item') as FormControl;
-    }
+    // get item(): FormControl {
+    //     return this.form.get('itemsList.item') as FormControl;
+    // }
 }

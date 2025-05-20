@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { SidenavService } from '../../shared/services/sidenav.service';
 import { InvoiceFormController } from './invoice-form-controller';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { concatMap } from 'rxjs';
 import { FormType } from '../../shared/models/form-type.type';
 import { InvoicesService } from '../../shared/services/invoices.service';
+import { formatDate } from '../../utils/format-date';
 
 @Component({
   selector: 'app-invoice-form',
@@ -31,8 +32,6 @@ export class InvoiceFormComponent extends InvoiceFormController {
   }
 
   ngOnInit(): void {
-    console.log(this.form.value);
-    
     this.formType = this.activatedRoute.snapshot.data['form'];
     this.activatedRoute.params.pipe(
       concatMap((params) => {
@@ -54,18 +53,16 @@ export class InvoiceFormComponent extends InvoiceFormController {
             city: invoice?.clientAddress.city,
             postCode: invoice?.clientAddress.postCode,
             country: invoice?.clientAddress.country,
-            invoiceDate: invoice?.createdAt,
+            invoiceDate: formatDate(invoice?.createdAt),
             paymentTerms: invoice?.paymentTerms,
             projectDescription: invoice?.description,
           },
-          itemsList: [
-            
-          ]
+          
         })
+        invoice?.items.forEach(item => this.addNewItem(item));
       }      
     })
   }
-
 
   closeSidenav() {
     this.location.back();

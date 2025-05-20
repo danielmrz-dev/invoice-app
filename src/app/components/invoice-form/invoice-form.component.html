@@ -60,7 +60,8 @@
                 </label>
                 <label class="form__label form__bill-to-label" for="invoiceDate">
                     Invoice date
-                    <input class="form__input" type="text" id="invoiceDate" formControlName="invoiceDate">
+                    <input class="form__input" type="date" id="invoiceDate" formControlName="invoiceDate">
+                    <span>{{ invoiceDate.value | date : 'dd MMM yyyy' }}</span>
                 </label>
                 <label class="form__label form__bill-to-label" for="paymentTerms">
                     Payment Terms
@@ -76,25 +77,25 @@
         <ul class="form__items-list" formArrayName="itemsList">
             <span class="form__section-title">Items</span>
             <li class="form__items-list-item" 
-                *ngFor="let item of items.controls; let i = index" formGroupName="items">
+                *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
                 <label 
                     class="form__label form__items-list-label" 
                     for="item-{{ i }}">
                         Item Name
-                    <input class="form__input" type="text" id="item-{{ i }}" [formControlName]="i">
+                    <input class="form__input" type="text" id="item-{{ i }}" formControlName="name">
                 </label>
                 <div class="form__items-list-item-info">
                     <label class="form__label" for="qty">
                         Qty.
-                        <input class="form__input" type="text" id="qty">
+                        <input class="form__input" type="text" id="qty" formControlName="quantity">
                     </label>
                     <label class="form__label" for="price">
                         Price
-                        <input class="form__input" type="text" id="price">
+                        <input class="form__input" type="text" id="price" formControlName="price">
                     </label>
                     <div class="form__label total">
                         Total
-                        <strong>400.00</strong>
+                        <input class="form__input" type="text" readonly formControlName="total">
                     </div>
                     <button class="form__items-list-remove-btn" 
                         (click)="removeItem(i)">

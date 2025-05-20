@@ -41,6 +41,9 @@
         font-weight: bold;
         line-height: .9375rem;
         width: 100%;
+        &[type="date"] {
+            color: transparent;
+        }
     }
     &__section-title {
         grid-area: 1 / 1 / 2 / 3;
@@ -88,6 +91,16 @@
                 {
                     grid-column: 1 / 3;
                 }
+                position: relative;
+                span {
+                    position: absolute;
+                    bottom: 17px;
+                    left: 21px;
+                    letter-spacing: 0.5px;
+                    color: v.$white;
+                    font-size: 15px;
+                    font-weight: bold;
+                }
             }
         }
     }
@@ -103,12 +116,17 @@
             padding-bottom: 27px;
             &-info {
                 display: grid;
-                grid-template-columns: 1.25fr 1.75fr 1fr 1fr;
+                grid-template-columns: 1.25fr 2.25fr 1.5fr 1fr;
                 align-items: center;
                 gap: 16px;
                 .total {
                     align-self: start;
-                    gap: 25.6px;
+                    input {
+                        background-color: transparent;
+                        color: v.$blue-gray;
+                        padding-inline: 0;
+                    }
+                    // gap: 25.6px;
                 }
             }
             &-add-new {
