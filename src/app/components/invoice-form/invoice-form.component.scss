@@ -180,6 +180,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: .5rem;
         button {
             font-size: 14px;
         }
@@ -193,6 +194,15 @@
         }
         &-save {
             @include m.actionBtnColors(v.$violet-blue);
+            padding-inline: 1rem;
+            &:disabled {
+                opacity: .4;
+                cursor: not-allowed;
+            }
+        }
+        &-cancel {
+            @include m.actionBtnColors(v.$dark-blue);
+            margin-left: auto;
             padding-inline: 1rem;
         }
     }

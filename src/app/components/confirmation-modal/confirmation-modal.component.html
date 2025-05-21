@@ -1,0 +1,16 @@
+<mat-dialog-content class="dialog">
+    <div class="dialog__text">
+        <h2 mat-dialog-title class="dialog__text-title">Confirm Deletion</h2>
+        <p class="dialog__text-message">
+            Are you sure you want to delete invoice #{{ data.invoiceId }}? This action cannot be undone.
+        </p>
+    </div>
+    <mat-dialog-actions class="dialog__btns-container">
+        <button class="dialog__cancel" mat-dialog-close>
+            Cancel
+        </button>
+        <button class="dialog__confirm" mat-dialog-close cdkFocusInitial>
+            Delete
+        </button>
+    </mat-dialog-actions>
+</mat-dialog-content>

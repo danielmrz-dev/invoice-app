@@ -34,6 +34,7 @@ export class InvoiceFormComponent extends InvoiceFormController {
   }
 
   ngOnInit(): void {
+    this.form.markAsUntouched();
     this.formType = this.activatedRoute.snapshot.data['form'];
     this.activatedRoute.params.pipe(
       concatMap((params) => {
@@ -76,4 +77,5 @@ export class InvoiceFormComponent extends InvoiceFormController {
     this.location.back();
     this.sidenavService.closeSidenav();
   }
+
 }

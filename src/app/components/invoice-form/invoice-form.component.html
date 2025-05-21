@@ -115,12 +115,23 @@
         </ul>
 
         <div class="form__actions">
-            <button class="form__actions-discard"
-                (click)="discardChangesAndClose()">
-                Discard
-            </button>
-            <button class="form__actions-draft">Save as Draft</button>
-            <button class="form__actions-save">Save & Send</button>
+
+            <ng-container *ngIf="formType === 'create'; else edit">
+                <button class="form__actions-discard"
+                    (click)="discardChangesAndClose()">
+                    Discard
+                </button>
+                <button class="form__actions-draft">Save as Draft</button>
+                <button class="form__actions-save">Save & Send</button>
+            </ng-container>
+
+            <ng-template #edit>
+                <button class="form__actions-cancel">Cancel</button>
+                <button class="form__actions-save" [disabled]="form.untouched">
+                    Save changes
+                </button>
+            </ng-template>
+            
         </div>
     </form>
 
