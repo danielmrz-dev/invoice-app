@@ -16,7 +16,8 @@ export class InvoiceFormController {
             billTo: fb.group({
                 clientName: fb.control('', []),
                 clientEmail: fb.control('', []),
-                city: fb.control('', []),
+                clientStreet: fb.control('', []),
+                clientCity: fb.control('', []),
                 postCode: fb.control('', []),
                 country: fb.control('', []),
                 invoiceDate: fb.control('', []),
@@ -68,6 +69,10 @@ export class InvoiceFormController {
 
     get clientEmail(): FormControl {
         return this.form.get('billTo.clientEmail') as FormControl;
+    }
+
+    get clientStreet(): FormControl {
+        return this.form.get('billTo.clientStreet') as FormControl;
     }
 
     get clientCity(): FormControl {

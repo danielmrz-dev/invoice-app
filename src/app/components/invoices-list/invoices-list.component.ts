@@ -28,8 +28,8 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.invoices$ = this.invoicesService.getInvoicesList();
-    this.invoicesAmountSub = this.invoicesService.getInvoicesList().subscribe((invoicesList) => {
+    this.invoices$ = this.invoicesService.invoices$;
+    this.invoicesAmountSub = this.invoicesService.invoices$.subscribe((invoicesList) => {
       this.invoicesAmount = invoicesList.length;
     })
   }

@@ -10,6 +10,8 @@ import { InvoicesService } from '../../shared/services/invoices.service';
 import { formatDate } from '../../utils/format-date';
 import { NgxMaskDirective } from 'ngx-mask';
 import { MatSelectModule } from '@angular/material/select';
+import { Invoice } from '../../shared/models/invoice.interface';
+import { createInvoiceObj } from '../../utils/create-invoice-obj';
 
 @Component({
   selector: 'app-invoice-form',
@@ -22,6 +24,7 @@ export class InvoiceFormComponent extends InvoiceFormController {
 
   formType!: FormType;
   invoiceId: string = '';
+  invoice: Invoice = {} as Invoice;
 
   constructor(
     private readonly sidenavService: SidenavService,
@@ -42,6 +45,9 @@ export class InvoiceFormComponent extends InvoiceFormController {
         return this.invoicesService.getInvoiceById(params['id']);
       })
     ).subscribe((invoice) => {
+      if (invoice) {
+        this.invoice = invoice;        
+      }
       if (this.formType === 'edit') {
         this.form.patchValue({
           billFrom: {
@@ -53,7 +59,8 @@ export class InvoiceFormComponent extends InvoiceFormController {
           billTo: {
             clientName: invoice?.clientName,
             clientEmail: invoice?.clientEmail,
-            city: invoice?.clientAddress.city,
+            clientStreet: invoice?.clientAddress.street,
+            clientCity: invoice?.clientAddress.city,
             postCode: invoice?.clientAddress.postCode,
             country: invoice?.clientAddress.country,
             invoiceDate: formatDate(invoice?.createdAt),
@@ -76,6 +83,29 @@ export class InvoiceFormComponent extends InvoiceFormController {
     this.items.clear();
     this.location.back();
     this.sidenavService.closeSidenav();
+  }
+
+  editInvoice(id: string) {
+    this.invoicesService.editInvoice(id, {
+      senderAddress: {
+        street: this.street.value,
+        city: this.city.value,
+        postCode: this.postCode.value,
+        country: this.country.value,
+      },
+      clientAddress: {
+        street: this.clientStreet.value,
+        city: this.clientCity.value,
+        postCode: this.clientPostCode.value,
+        country: this.clientCountry.value,
+      },
+      clientName: this.clientName.value,
+      createdAt: this.invoiceDate.value,
+      clientEmail: this.clientEmail.value,
+      paymentTerms: this.paymentTerms.value,
+      description: this.projectDescription.value,
+      items: []
+    });
   }
 
 }

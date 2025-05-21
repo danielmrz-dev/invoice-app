@@ -46,6 +46,10 @@
                     Client's email
                     <input class="form__input" type="text" id="clientEmail" formControlName="clientEmail">
                 </label>
+                <label class="form__label form__bill-to-label" for="clientStreet">
+                    Street Address
+                    <input class="form__input" type="text" id="clientStreet" formControlName="clientStreet">
+                </label>
                 <label class="form__label form__bill-to-label" for="city">
                     City
                     <input class="form__input" type="text" id="city" formControlName="city">
@@ -127,7 +131,7 @@
 
             <ng-template #edit>
                 <button class="form__actions-cancel">Cancel</button>
-                <button class="form__actions-save" [disabled]="form.untouched">
+                <button class="form__actions-save" [disabled]="form.untouched" (click)="editInvoice(invoiceId)">
                     Save changes
                 </button>
             </ng-template>
