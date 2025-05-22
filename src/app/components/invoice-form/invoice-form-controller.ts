@@ -1,5 +1,4 @@
 import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { BehaviorSubject } from "rxjs";
 
 export class InvoiceFormController {
 
@@ -7,24 +6,27 @@ export class InvoiceFormController {
 
     constructor(readonly fb: FormBuilder) {
         this.form = fb.group({
-            billFrom: fb.group({
-                street: fb.control('', []),
-                city: fb.control('', []),
-                postCode: fb.control('', []),
-                country: fb.control('', []),
+            createdAt: fb.control(''),
+            paymentDue: fb.control(''),
+            description: fb.control(''),
+            paymentTerms: fb.control(''),
+            clientName: fb.control(''),
+            clientEmail: fb.control(''),
+            status: fb.control(''),
+            senderAddress: fb.group({
+                street: fb.control(''),
+                city: fb.control(''),
+                postCode: fb.control(''),
+                country: fb.control(''),
             }),
-            billTo: fb.group({
-                clientName: fb.control('', []),
-                clientEmail: fb.control('', []),
-                clientStreet: fb.control('', []),
-                clientCity: fb.control('', []),
-                postCode: fb.control('', []),
-                country: fb.control('', []),
-                invoiceDate: fb.control('', []),
-                paymentTerms: fb.control('', []),
-                projectDescription: fb.control('', []),
+            clientAddress: fb.group({
+                street:fb.control(''),
+                city:fb.control(''),
+                postCode:fb.control(''),
+                country:fb.control(''),
             }),
-            itemsList: fb.array([])
+            items: fb.array([]),
+            total: fb.control('')
         })
     }
 
@@ -47,60 +49,68 @@ export class InvoiceFormController {
         this.items.removeAt(index);
     }
 
-    get street(): FormControl {
-        return this.form.get('billFrom.street') as FormControl;
+    get createdAt(): FormControl {
+        return this.form.get('createdAt') as FormControl;
     }
 
-    get city(): FormControl {
-        return this.form.get('billFrom.city') as FormControl;
+    get paymentDue(): FormControl {
+        return this.form.get('paymentDue') as FormControl;
     }
 
-    get postCode(): FormControl {
-        return this.form.get('billFrom.postCode') as FormControl;
-    }
-
-    get country(): FormControl {
-        return this.form.get('billFrom.country') as FormControl;
-    }
-
-    get clientName(): FormControl {
-        return this.form.get('billTo.clientName') as FormControl;
-    }
-
-    get clientEmail(): FormControl {
-        return this.form.get('billTo.clientEmail') as FormControl;
-    }
-
-    get clientStreet(): FormControl {
-        return this.form.get('billTo.clientStreet') as FormControl;
-    }
-
-    get clientCity(): FormControl {
-        return this.form.get('billTo.clientCity') as FormControl;
-    }
-
-    get clientPostCode(): FormControl {
-        return this.form.get('billTo.clientPostCode') as FormControl;
-    }
-
-    get clientCountry(): FormControl {
-        return this.form.get('billTo.clientCountry') as FormControl;
-    }
-
-    get invoiceDate(): FormControl {
-        return this.form.get('billTo.invoiceDate') as FormControl;
+    get description(): FormControl {
+        return this.form.get('description') as FormControl;
     }
 
     get paymentTerms(): FormControl {
-        return this.form.get('billTo.paymentTerms') as FormControl;
+        return this.form.get('paymentTerms') as FormControl;
     }
 
-    get projectDescription(): FormControl {
-        return this.form.get('billTo.projectDescription') as FormControl;
+    get clientName(): FormControl {
+        return this.form.get('clientName') as FormControl;
+    }
+
+    get clientEmail(): FormControl {
+        return this.form.get('clientEmail') as FormControl;
+    }
+
+    get senderStreet(): FormControl {
+        return this.form.get('senderAddress.street') as FormControl;
+    }
+
+    get senderCity(): FormControl {
+        return this.form.get('senderAddress.city') as FormControl;
+    }
+
+    get senderPostCode(): FormControl {
+        return this.form.get('senderAddress.postCode') as FormControl;
+    }
+
+    get senderCountry(): FormControl {
+        return this.form.get('senderAddress.country') as FormControl;
+    }
+
+    get clientStreet(): FormControl {
+        return this.form.get('clientAddress.street') as FormControl;
+    }
+
+    get clientCity(): FormControl {
+        return this.form.get('clientAddress.city') as FormControl;
+    }
+
+    get clientPostCode(): FormControl {
+        return this.form.get('clientAddress.postCode') as FormControl;
+    }
+
+    get clientCountry(): FormControl {
+        return this.form.get('clientAddress.country') as FormControl;
+    }
+
+    get status(): FormControl {
+        return this.form.get('status') as FormControl;
     }
 
     get items(): FormArray {
-        return this.form.get('itemsList') as FormArray;
+        return this.form.get('items') as FormArray;
     }
 
 }

@@ -46,29 +46,34 @@ export class InvoiceFormComponent extends InvoiceFormController {
       })
     ).subscribe((invoice) => {
       if (invoice) {
-        this.invoice = invoice;        
+        this.invoice = invoice;
       }
       if (this.formType === 'edit') {
         this.form.patchValue({
-          billFrom: {
+          createdAt: invoice?.createdAt,
+          paymentDue: invoice?.paymentDue,
+          description: invoice?.description,
+          paymentTerms: invoice?.paymentTerms,
+          clientName: invoice?.clientName,
+          clientEmail: invoice?.clientEmail,
+          status: invoice?.status,
+          senderAddress: {
             street: invoice?.senderAddress.street,
             city: invoice?.senderAddress.city,
             postCode: invoice?.senderAddress.postCode,
             country: invoice?.senderAddress.country,
           },
-          billTo: {
-            clientName: invoice?.clientName,
-            clientEmail: invoice?.clientEmail,
-            clientStreet: invoice?.clientAddress.street,
-            clientCity: invoice?.clientAddress.city,
+          clientAddress: {
+            street: invoice?.clientAddress.street,
+            city: invoice?.clientAddress.city,
             postCode: invoice?.clientAddress.postCode,
             country: invoice?.clientAddress.country,
-            invoiceDate: formatDate(invoice?.createdAt),
-            paymentTerms: invoice?.paymentTerms,
-            projectDescription: invoice?.description,
           },
+          total: invoice?.total
         })
-        invoice?.items.forEach(item => this.addNewItem(item));
+
+        invoice?.items.forEach((item) => this.addNewItem(item));
+
       }
     })
   }
@@ -86,26 +91,7 @@ export class InvoiceFormComponent extends InvoiceFormController {
   }
 
   editInvoice(id: string) {
-    this.invoicesService.editInvoice(id, {
-      senderAddress: {
-        street: this.street.value,
-        city: this.city.value,
-        postCode: this.postCode.value,
-        country: this.country.value,
-      },
-      clientAddress: {
-        street: this.clientStreet.value,
-        city: this.clientCity.value,
-        postCode: this.clientPostCode.value,
-        country: this.clientCountry.value,
-      },
-      clientName: this.clientName.value,
-      createdAt: this.invoiceDate.value,
-      clientEmail: this.clientEmail.value,
-      paymentTerms: this.paymentTerms.value,
-      description: this.projectDescription.value,
-      items: []
-    });
+    this.invoicesService.editInvoice(id, this.form.value);
   }
 
 }

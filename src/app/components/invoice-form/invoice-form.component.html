@@ -10,7 +10,7 @@
         <h3 class="form__title" *ngIf="formType === 'edit'">
             Edit <span>#</span>{{ invoiceId }}
         </h3>
-        <div class="form__bill-from" formGroupName="billFrom">
+        <div class="form__bill-from" formGroupName="senderAddress">
             <span class="form__section-title">Bill from</span>
             <div class="form__bill-from-inputs">
                 <label class="form__label form__bill-from-label" for="street">
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="form__bill-to" formGroupName="billTo">
+        <div class="form__bill-to">
             <span class="form__section-title">Bill to</span>
             <div class="form__bill-to-inputs">
                 <label class="form__label form__bill-to-label" for="clientName">
@@ -46,26 +46,29 @@
                     Client's email
                     <input class="form__input" type="text" id="clientEmail" formControlName="clientEmail">
                 </label>
-                <label class="form__label form__bill-to-label" for="clientStreet">
-                    Street Address
-                    <input class="form__input" type="text" id="clientStreet" formControlName="clientStreet">
-                </label>
-                <label class="form__label form__bill-to-label" for="city">
-                    City
-                    <input class="form__input" type="text" id="city" formControlName="city">
-                </label>
-                <label class="form__label form__bill-to-label" for="postCode">
-                    Post Code
-                    <input class="form__input" type="text" id="postCode" formControlName="postCode">
-                </label>
-                <label class="form__label form__bill-to-label" for="country">
-                    Country
-                    <input class="form__input" type="text" id="country" formControlName="country">
-                </label>
+                <ng-container formGroupName="clientAddress">
+                    <label class="form__label form__bill-to-label" for="street">
+                        Street Address
+                        <input class="form__input" type="text" id="street" formControlName="street">
+                    </label>
+                    <label class="form__label form__bill-to-label" for="city">
+                        City
+                        <input class="form__input" type="text" id="city" formControlName="city">
+                    </label>
+                    <label class="form__label form__bill-to-label" for="postCode">
+                        Post Code
+                        <input class="form__input" type="text" id="postCode" formControlName="postCode">
+                    </label>
+                    <label class="form__label form__bill-to-label" for="country">
+                        Country
+                        <input class="form__input" type="text" id="country" formControlName="country">
+                    </label>
+                </ng-container>
+                
                 <label class="form__label form__bill-to-label" for="invoiceDate">
                     Invoice date
-                    <input class="form__input" type="date" id="invoiceDate" formControlName="invoiceDate">
-                    <span>{{ invoiceDate.value | date : 'dd MMM yyyy' }}</span>
+                    <input class="form__input" type="date" id="invoiceDate" formControlName="createdAt">
+                    <span>{{ createdAt.value | date : 'dd MMM yyyy' }}</span>
                 </label>
                 <label class="form__label form__bill-to-label" for="paymentTerms">
                     Payment Terms
@@ -76,17 +79,18 @@
                         <option class="form__input-option" value="30">Next 30 days</option>
                     </select>
                 </label>
-                <label class="form__label form__bill-to-label" for="projectDescription">
+                <label class="form__label form__bill-to-label" for="description">
                     Project description
-                    <input class="form__input" type="text" id="projectDescription" formControlName="projectDescription">
+                    <input class="form__input" type="text" id="description" formControlName="description">
                 </label>
             </div>
         </div>
 
-        <ul class="form__items-list" formArrayName="itemsList">
+        <ul class="form__items-list" formArrayName="items">
             <span class="form__section-title">Items</span>
             <li class="form__items-list-item" 
                 *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+                
                 <label 
                     class="form__label form__items-list-label" 
                     for="item-{{ i }}">
