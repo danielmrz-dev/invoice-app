@@ -10,7 +10,7 @@ import { InvoicesService } from '../../shared/services/invoices.service';
 import { formatDate } from '../../utils/format-date';
 import { NgxMaskDirective } from 'ngx-mask';
 import { MatSelectModule } from '@angular/material/select';
-import { Invoice } from '../../shared/models/invoice.interface';
+import { Invoice, InvoiceStatus } from '../../shared/models/invoice.interface';
 import { createInvoiceObj } from '../../utils/create-invoice-obj';
 
 @Component({
@@ -78,8 +78,8 @@ export class InvoiceFormComponent extends InvoiceFormController {
     })
   }
 
-  createNewInvoice() {
-    this.invoicesService.createNewInvoice(this.form.value);
+  createNewInvoice(status: InvoiceStatus) {
+    this.invoicesService.createNewInvoice(this.form.value, status);
     this.location.back();
     this.sidenavService.closeSidenav();
   }

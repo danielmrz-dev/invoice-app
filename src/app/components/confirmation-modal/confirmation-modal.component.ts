@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
@@ -10,7 +11,7 @@ import {
 @Component({
   selector: 'app-confirmation-modal',
   standalone: true,
-  imports: [MatDialogActions, MatDialogClose, MatDialogContent],
+  imports: [MatDialogActions, MatDialogClose, MatDialogContent, CommonModule],
   templateUrl: './confirmation-modal.component.html',
   styleUrl: './confirmation-modal.component.scss'
 })

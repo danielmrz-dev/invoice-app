@@ -129,8 +129,8 @@
                     (click)="discardChangesAndClose()">
                     Discard
                 </button>
-                <button class="form__actions-draft">Save as Draft</button>
-                <button class="form__actions-save" (click)="createNewInvoice()">Save & Send</button>
+                <button class="form__actions-draft" (click)="createNewInvoice('draft')">Save as Draft</button>
+                <button class="form__actions-save" (click)="createNewInvoice('pending')">Save & Send</button>
             </ng-container>
 
             <ng-template #edit>

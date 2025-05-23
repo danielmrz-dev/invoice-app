@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Invoice, Item } from '../models/invoice.interface';
+import { Invoice, InvoiceStatus, Item } from '../models/invoice.interface';
 import { invoices } from '../../../assets/data';
 import { generateInvoiceId } from '../../utils/generate-invoice-id';
 import { calculatePaymentDue } from '../../utils/calculate-payment-due-date';
@@ -22,9 +22,9 @@ export class InvoicesService {
     )
   }
 
-  createNewInvoice(invoiceInfo: Invoice) {
+  createNewInvoice(invoiceInfo: Invoice, status: InvoiceStatus) {
     invoiceInfo.id = this.generateInvoiceId();
-    invoiceInfo.status = 'pending';
+    invoiceInfo.status = status;
     invoiceInfo.paymentDue = calculatePaymentDue(invoiceInfo.createdAt, invoiceInfo.paymentTerms);
     invoiceInfo.total = invoiceInfo.items.reduce((acc, current) => acc + (current.price * current.quantity), 0);
     this.invoicesListSub.next([...this.invoicesListSub.getValue(), invoiceInfo]);
@@ -60,11 +60,8 @@ export class InvoicesService {
     current.items = updated.items || current.items;
     current.paymentTerms = updated.paymentTerms || current.paymentTerms;
     current.paymentDue = calculatePaymentDue(updated.createdAt, updated.paymentTerms) || current.paymentDue;
-    console.log("Data de criação => ", updated.createdAt, ' com prazo de ', updated.paymentTerms, ' dias para pagar.');
-    console.log("Data esperada de pagamento => ", calculatePaymentDue(updated.createdAt, updated.paymentTerms));
     current.status = updated.status || current.status;
     current.total = this.getTotalInvoiceAmountDue(updated.items) || current.total;
-    
   }
 
   private getTotalInvoiceAmountDue(items: Item[]): number {

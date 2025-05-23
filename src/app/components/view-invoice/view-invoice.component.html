@@ -116,7 +116,7 @@
             <button class="view-invoice__actions-btn-delete" (click)="deleteInvoice()">
                 Delete
             </button>
-            <button class="view-invoice__actions-btn-mark-as-paid">
+            <button class="view-invoice__actions-btn-mark-as-paid" (click)="markInvoiceAsPaid()" [disabled]="invoice.status === 'paid'">
                 Mark as paid
             </button>
         </div>

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StatusColoredTagComponent } from "../status-colored-tag/status-colored-tag.component";
 import { InvoicesService } from '../../shared/services/invoices.service';
 import { Invoice } from '../../shared/models/invoice.interface';
-import { BehaviorSubject, concatMap, Observable, of } from 'rxjs';
+import { concatMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { SidenavService } from '../../shared/services/sidenav.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -27,14 +27,14 @@ export class ViewInvoiceComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly sidenavService: SidenavService,
     private readonly dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.pipe(
       concatMap(
         (params) => {
           if (params.get('id')) {
-            this.idNotFound = params.get('id');              
+            this.idNotFound = params.get('id');
           }
           return this.invoicesService.getInvoiceById(params.get('id'))
         }
@@ -56,13 +56,29 @@ export class ViewInvoiceComponent implements OnInit {
   deleteInvoice() {
     this.dialog.open(ConfirmationModalComponent, {
       data: {
+        confirmDelete: true,
         invoiceId: this.invoice?.id
       }
     }).afterClosed().subscribe((result) => {
       if (result === 'delete' && this.invoice?.id) {
-        this.invoicesService.deleteInvoice(this.invoice.id);        
+        this.invoicesService.deleteInvoice(this.invoice.id);
         this.router.navigate(['/invoices']);
       }
     })
+  }
+
+  markInvoiceAsPaid() {
+    if (this.invoice) {
+      this.dialog.open(ConfirmationModalComponent, {
+      data: {
+        markAsPaid: true,
+        invoiceId: this.invoice?.id
+      }
+    }).afterClosed().subscribe((result) => {
+      if (result === 'confirm' && this.invoice?.id) {
+        this.invoice.status = 'paid';      
+      }
+    })
+    }
   }
 }
