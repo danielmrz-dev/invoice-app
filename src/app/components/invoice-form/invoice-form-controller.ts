@@ -6,27 +6,27 @@ export class InvoiceFormController {
 
     constructor(readonly fb: FormBuilder) {
         this.form = fb.group({
-            createdAt: fb.control(''),
-            paymentDue: fb.control(''),
-            description: fb.control(''),
-            paymentTerms: fb.control(''),
-            clientName: fb.control(''),
-            clientEmail: fb.control(''),
-            status: fb.control(''),
+            createdAt: fb.control('2025-05-23'),
+            paymentDue: fb.control('2025-05-23'),
+            description: fb.control('Teste'),
+            paymentTerms: fb.control(7),
+            clientName: fb.control('Teste'),
+            clientEmail: fb.control('Teste'),
+            status: fb.control('pending'),
             senderAddress: fb.group({
-                street: fb.control(''),
-                city: fb.control(''),
-                postCode: fb.control(''),
-                country: fb.control(''),
+                street: fb.control('Teste'),
+                city: fb.control('Teste'),
+                postCode: fb.control('Teste'),
+                country: fb.control('Teste'),
             }),
             clientAddress: fb.group({
-                street:fb.control(''),
-                city:fb.control(''),
-                postCode:fb.control(''),
-                country:fb.control(''),
+                street:fb.control('Teste'),
+                city:fb.control('Teste'),
+                postCode:fb.control('Teste'),
+                country:fb.control('Teste'),
             }),
             items: fb.array([]),
-            total: fb.control('')
+            total: fb.control('Teste')
         })
     }
 

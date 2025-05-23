@@ -78,6 +78,12 @@ export class InvoiceFormComponent extends InvoiceFormController {
     })
   }
 
+  createNewInvoice() {
+    this.invoicesService.createNewInvoice(this.form.value);
+    this.location.back();
+    this.sidenavService.closeSidenav();
+  }
+
   closeSidenav() {
     this.location.back();
     this.sidenavService.closeSidenav();
@@ -92,6 +98,8 @@ export class InvoiceFormComponent extends InvoiceFormController {
 
   editInvoice(id: string) {
     this.invoicesService.editInvoice(id, this.form.value);
+    this.location.back();
+    this.sidenavService.closeSidenav();
   }
 
 }

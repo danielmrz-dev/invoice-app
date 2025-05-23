@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Invoice } from '../models/invoice.interface';
+import { Invoice, Item } from '../models/invoice.interface';
 import { invoices } from '../../../assets/data';
+import { generateInvoiceId } from '../../utils/generate-invoice-id';
+import { calculatePaymentDue } from '../../utils/calculate-payment-due-date';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,6 @@ export class InvoicesService {
 
   invoicesListSub = new BehaviorSubject<Invoice[]>(invoices);
   invoices$ = this.invoicesListSub.asObservable();
-
-  constructor(private readonly http: HttpClient) { }
 
   getInvoiceById(id: string | null): Observable<Invoice | undefined> {
     return this.invoices$.pipe(
@@ -23,6 +22,13 @@ export class InvoicesService {
     )
   }
 
+  createNewInvoice(invoiceInfo: Invoice) {
+    invoiceInfo.id = this.generateInvoiceId();
+    invoiceInfo.status = 'pending';
+    invoiceInfo.paymentDue = calculatePaymentDue(invoiceInfo.createdAt, invoiceInfo.paymentTerms);
+    this.invoicesListSub.next([...this.invoicesListSub.getValue(), invoiceInfo]);
+  }
+
   editInvoice(id: string, updatedInvoice: Invoice) {
     const currentInvoices = this.invoicesListSub.getValue();
     const invoiceToReplace = currentInvoices.find(invoice => invoice.id === id);
@@ -31,9 +37,14 @@ export class InvoicesService {
     }
   }
 
+  deleteInvoice(id: string) {
+    const invoiceFound = this.invoicesListSub.getValue().find(invoice => invoice.id === id);
+    this.invoicesListSub.next(this.invoicesListSub.getValue().filter(item => item.id !== invoiceFound?.id));
+  }
+
   private updateInvoice(current: Invoice, updated: Invoice): void {
     current.id = current.id;
-    current.clientAddress.street = updated.clientAddress.street ? updated.clientAddress.street : current.clientAddress.street;
+    current.clientAddress.street = updated.clientAddress.street || current.clientAddress.street;
     current.clientAddress.city = updated.clientAddress.city || current.clientAddress.city;
     current.clientAddress.country = updated.clientAddress.country || current.clientAddress.country;
     current.clientAddress.postCode = updated.clientAddress.postCode || current.clientAddress.postCode;
@@ -45,7 +56,22 @@ export class InvoicesService {
     current.paymentDue = updated.paymentDue || current.paymentDue;
     current.paymentTerms = updated.paymentTerms || current.paymentTerms;
     current.status = updated.status || current.status;
-    current.total = updated.total || current.total;
+    current.total = this.getTotalInvoiceAmountDue(updated.items) || current.total;
   }
+
+  private getTotalInvoiceAmountDue(items: Item[]): number {
+    return items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  }
+
+  private generateInvoiceId(): string {
+    let newId: string;
+    const existingIds = new Set(this.invoicesListSub.getValue().map(inv => inv.id));
+    do {
+      newId = generateInvoiceId();
+    } while (existingIds.has(newId));
+    return newId;
+  }
+
+
 
 }
