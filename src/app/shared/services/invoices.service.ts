@@ -26,6 +26,7 @@ export class InvoicesService {
     invoiceInfo.id = this.generateInvoiceId();
     invoiceInfo.status = 'pending';
     invoiceInfo.paymentDue = calculatePaymentDue(invoiceInfo.createdAt, invoiceInfo.paymentTerms);
+    invoiceInfo.total = invoiceInfo.items.reduce((acc, current) => acc + (current.price * current.quantity), 0);
     this.invoicesListSub.next([...this.invoicesListSub.getValue(), invoiceInfo]);
   }
 
@@ -48,15 +49,22 @@ export class InvoicesService {
     current.clientAddress.city = updated.clientAddress.city || current.clientAddress.city;
     current.clientAddress.country = updated.clientAddress.country || current.clientAddress.country;
     current.clientAddress.postCode = updated.clientAddress.postCode || current.clientAddress.postCode;
+    current.senderAddress.street = updated.senderAddress.street || updated.senderAddress.street
+    current.senderAddress.city = updated.senderAddress.city || updated.senderAddress.city
+    current.senderAddress.postCode = updated.senderAddress.postCode || updated.senderAddress.postCode
+    current.senderAddress.country = updated.senderAddress.country || updated.senderAddress.country
     current.clientEmail = updated.clientEmail || current.clientEmail;
     current.clientName = updated.clientName || current.clientName;
     current.createdAt = updated.createdAt || current.createdAt;
     current.description = updated.description || current.description;
     current.items = updated.items || current.items;
-    current.paymentDue = updated.paymentDue || current.paymentDue;
     current.paymentTerms = updated.paymentTerms || current.paymentTerms;
+    current.paymentDue = calculatePaymentDue(updated.createdAt, updated.paymentTerms) || current.paymentDue;
+    console.log("Data de criação => ", updated.createdAt, ' com prazo de ', updated.paymentTerms, ' dias para pagar.');
+    console.log("Data esperada de pagamento => ", calculatePaymentDue(updated.createdAt, updated.paymentTerms));
     current.status = updated.status || current.status;
     current.total = this.getTotalInvoiceAmountDue(updated.items) || current.total;
+    
   }
 
   private getTotalInvoiceAmountDue(items: Item[]): number {
