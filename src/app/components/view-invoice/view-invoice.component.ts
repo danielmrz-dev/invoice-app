@@ -76,7 +76,7 @@ export class ViewInvoiceComponent implements OnInit {
       }
     }).afterClosed().subscribe((result) => {
       if (result === 'confirm' && this.invoice?.id) {
-        this.invoice.status = 'paid';      
+        this.invoicesService.markInvoiceAsPaid(this.invoice);
       }
     })
     }

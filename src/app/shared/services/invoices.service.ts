@@ -13,6 +13,10 @@ export class InvoicesService {
   invoicesListSub = new BehaviorSubject<Invoice[]>(invoices);
   invoices$ = this.invoicesListSub.asObservable();
 
+  constructor() {
+    this.getInvoicesFromLocalStorage();
+  }
+
   getInvoiceById(id: string | null): Observable<Invoice | undefined> {
     return this.invoices$.pipe(
       map((invoices) => {
@@ -28,6 +32,7 @@ export class InvoicesService {
     invoiceInfo.paymentDue = calculatePaymentDue(invoiceInfo.createdAt, invoiceInfo.paymentTerms);
     invoiceInfo.total = invoiceInfo.items.reduce((acc, current) => acc + (current.price * current.quantity), 0);
     this.invoicesListSub.next([...this.invoicesListSub.getValue(), invoiceInfo]);
+    this.saveInvoicesOnLocalStorage();
   }
 
   editInvoice(id: string, updatedInvoice: Invoice) {
@@ -41,6 +46,12 @@ export class InvoicesService {
   deleteInvoice(id: string) {
     const invoiceFound = this.invoicesListSub.getValue().find(invoice => invoice.id === id);
     this.invoicesListSub.next(this.invoicesListSub.getValue().filter(item => item.id !== invoiceFound?.id));
+    this.saveInvoicesOnLocalStorage();
+  }
+
+  markInvoiceAsPaid(invoice: Invoice) {
+    invoice.status = 'paid';
+    this.saveInvoicesOnLocalStorage();
   }
 
   private updateInvoice(current: Invoice, updated: Invoice): void {
@@ -62,6 +73,7 @@ export class InvoicesService {
     current.paymentDue = calculatePaymentDue(updated.createdAt, updated.paymentTerms) || current.paymentDue;
     current.status = updated.status || current.status;
     current.total = this.getTotalInvoiceAmountDue(updated.items) || current.total;
+    this.saveInvoicesOnLocalStorage();
   }
 
   private getTotalInvoiceAmountDue(items: Item[]): number {
@@ -77,6 +89,16 @@ export class InvoicesService {
     return newId;
   }
 
+  private getInvoicesFromLocalStorage() {
+    const storagedInvoices = localStorage.getItem('invoices');
+    if (storagedInvoices) {
+      this.invoicesListSub.next(JSON.parse(storagedInvoices));
+    } else {
+      this.invoicesListSub.next(invoices);
+    }
+  }
 
-
+  private saveInvoicesOnLocalStorage() {
+    localStorage.setItem('invoices', JSON.stringify(this.invoicesListSub.getValue()));
+  }
 }
