@@ -134,7 +134,7 @@
             </ng-container>
 
             <ng-template #edit>
-                <button class="form__actions-cancel">Cancel</button>
+                <button class="form__actions-cancel" (click)="discardChangesAndClose()">Cancel</button>
                 <button class="form__actions-save" [disabled]="form.untouched" (click)="editInvoice(invoiceId)">
                     Save changes
                 </button>

@@ -7,9 +7,23 @@
             </span>
         </div>
         <div class="invoices__actions">
-            <button class="invoices__actions-filter">
-                Filter            
+            <button class="invoices__actions-filter" [matMenuTriggerFor]="menu">
+                Filter by status
             </button>
+            <mat-menu #menu="matMenu">
+                <label for="paid">
+                    <input type="checkbox" id="paid">
+                    Paid
+                </label>
+                <label for="pending">
+                    <input type="checkbox" id="pending">
+                    Pending
+                </label>
+                <label for="draft">
+                    <input type="checkbox" id="draft">
+                    Draft
+                </label>
+            </mat-menu>
             <button class="invoices__actions-create" (click)="openSidenav()">
                 <img src="icon-plus.svg" alt="">
                 New

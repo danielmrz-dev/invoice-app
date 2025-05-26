@@ -16,5 +16,30 @@
     min-height: 0 !important;
 }
 
-.mat-mdc-dialog-actions {
+.mat-mdc-menu-panel {
+    margin: 1rem 0;
+    padding: 0 !important;
+    background-color: v.$dark-blue !important;
+}
+
+.mat-mdc-focus-indicator {
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+.mat-menu-item {
+    padding: 0 !important;
+}
+
+.mdc-label {
+    color: v.$white;
+    margin-right: auto;
+}
+
+.mat-mdc-menu-content {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }

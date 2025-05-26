@@ -7,11 +7,15 @@ import { InvoicesAmountPipe } from '../../shared/pipes/invoices-amount.pipe';
 import { InvoiceCardComponent } from "../invoice-card/invoice-card.component";
 import { SidenavService } from '../../shared/services/sidenav.service';
 import { Router } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
+
 
 @Component({
   selector: 'app-invoices-list',
   standalone: true,
-  imports: [InvoiceCardComponent, CommonModule, InvoicesAmountPipe, InvoiceCardComponent],
+  imports: [InvoiceCardComponent, CommonModule, InvoicesAmountPipe, InvoiceCardComponent, MatMenuModule, MatCheckboxModule],
   templateUrl: './invoices-list.component.html',
   styleUrl: './invoices-list.component.scss'
 })
