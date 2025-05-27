@@ -1,8 +1,6 @@
 @use "../../../scss/variables" as v;
 @use "../../../scss/mixins" as m;
 
-// .wrapper {}
-
 .go-back-btn {
     @include m.goBackBtn();
     padding: 1.5rem;
@@ -38,6 +36,12 @@
             bottom: 18px;
             right: 15px;
             pointer-events: none;
+        }
+        &-error-msg {
+            display: none;
+            position: absolute;
+            right: 0;
+            color: v.$coral-red;
         }
     }
     &__input {
@@ -107,6 +111,15 @@
         gap: 24px;
         margin-top: 1.25rem;
         padding: 0 1.5rem;
+        &-label-span {
+            position: absolute;
+            bottom: 17px;
+            left: 21px;
+            letter-spacing: 0.5px;
+            color: v.$white;
+            font-size: 15px;
+            font-weight: bold;
+        }
         &-inputs {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -123,15 +136,12 @@
                     grid-column: 1 / 3;
                 }
                 position: relative;
-                span {
+                &-error-msg {
                     position: absolute;
-                    bottom: 17px;
-                    left: 21px;
-                    letter-spacing: 0.5px;
-                    color: v.$white;
-                    font-size: 15px;
-                    font-weight: bold;
+                    right: 0;
+                    color: v.$coral-red;
                 }
+                
             }
         }
     }
@@ -141,6 +151,14 @@
         display: flex;
         flex-direction: column;
         gap: 22px;
+        position: relative;
+        &-error-msg {
+            display: none;
+            position: absolute;
+            right: 1.5rem;
+            font-size: 13px;
+            color: v.$coral-red;
+        }
         &-item {
             display: grid;
             gap: 25px;

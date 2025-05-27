@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { InvoicesService } from '../../shared/services/invoices.service';
 import { Observable, of, Subscription } from 'rxjs';
-import { Invoice } from '../../shared/models/invoice.interface';
+import { Invoice, InvoiceStatus } from '../../shared/models/invoice.interface';
 import { CommonModule } from '@angular/common';
 import { InvoicesAmountPipe } from '../../shared/pipes/invoices-amount.pipe';
 import { InvoiceCardComponent } from "../invoice-card/invoice-card.component";
@@ -21,9 +21,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 })
 export class InvoicesListComponent implements OnInit, OnDestroy {
 
-  invoices$: Observable<Invoice[]> = of([]);
+  invoices: Invoice[] = [];
+  filteredInvoices: Invoice[] = [];
   invoicesAmount: number = 0;
   invoicesAmountSub!: Subscription;
+  invoicesFilter: InvoiceStatus[] = [];
 
   constructor(
     private readonly invoicesService: InvoicesService,
@@ -32,7 +34,10 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.invoices$ = this.invoicesService.invoices$;
+    this.invoicesService.invoices$.subscribe((invoices) => {
+      this.invoices = invoices;
+      this.filteredInvoices = invoices;
+    });
     this.invoicesAmountSub = this.invoicesService.invoices$.subscribe((invoicesList) => {
       this.invoicesAmount = invoicesList.length;
     })
@@ -47,5 +52,25 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
       { outlets: { sidenav: ['new-invoice'] } }
     ]);
     this.sidenavService.toggleSidenav();
+  }
+
+  filterByStatus(event: Event) {
+    const checkbox = event.target as HTMLInputElement;
+    const filterAlreadyExists = this.invoicesFilter.some(status => status === checkbox.id);
+    if (checkbox.checked && !filterAlreadyExists) {
+      this.invoicesFilter.push(checkbox.id as InvoiceStatus);
+    }
+
+    if (!checkbox.checked && filterAlreadyExists) {
+      this.invoicesFilter = this.invoicesFilter.filter(status => status !== checkbox.id);
+    }
+
+    if (this.invoicesFilter.length === 0) {
+      this.filteredInvoices = this.invoices;
+    } else {
+      this.filteredInvoices = this.invoices.filter((invoice) => {
+        return this.invoicesFilter.includes(invoice.status)
+      })
+    }
   }
 }

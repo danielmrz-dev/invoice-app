@@ -41,6 +41,54 @@
             &::after {
                 content: url(../../../assets/images/icon-arrow-down.svg);
             }
+            &-label {
+                display: flex;
+                flex-direction: row-reverse;
+                align-items: center;
+                justify-content: flex-end;
+                gap: .8125rem;
+                padding: 0.75rem 1rem;
+                width: 100%;
+                font-size: 15px;
+                line-height: 15px;
+                font-weight: bold;
+                color: v.$white;
+                cursor: pointer;
+                transition: background-color .3s ease;
+                &:hover {
+                    background-color: v.$light-blue-opaque;
+                }
+                input[type="checkbox"] {
+                    display: none;
+                }
+                input[type="checkbox"]:checked + span::after {
+                    opacity: 1;
+                }
+                span {
+                    width: 16px;
+                    height: 16px;
+                    background-color: #fff;
+                    border-radius: 2px;
+                    transform: translateY(-2px);
+                    border: 1px solid v.$lavender;
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    &::after {
+                        content: '✓';
+                        font-size: 8px;
+                        text-align: center;
+                        width: 100%;
+                        height: 100%;
+                        padding: 0.1rem;
+                        border-radius: 2px;
+                        background-color: v.$violet-blue;
+                        position: absolute;
+                        opacity: 0;
+                    }
+                }
+            }
         }
         &-create {
             display: flex;

@@ -1,5 +1,7 @@
 @use "./variables" as v;
 
+// DIALOG 
+
 .mat-mdc-dialog-surface {
     background-color: v.$dark-blue !important;
     border-radius: 8px !important;
@@ -15,6 +17,8 @@
     padding: 0 !important;
     min-height: 0 !important;
 }
+
+// MENU
 
 .mat-mdc-menu-panel {
     margin: 1rem 0;

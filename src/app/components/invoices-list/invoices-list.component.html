@@ -11,17 +11,20 @@
                 Filter by status
             </button>
             <mat-menu #menu="matMenu">
-                <label for="paid">
-                    <input type="checkbox" id="paid">
+                <label for="paid" class="invoices__actions-filter-label">
+                    <input type="checkbox" id="paid" (change)="filterByStatus($event)">
                     Paid
+                    <span></span>
                 </label>
-                <label for="pending">
-                    <input type="checkbox" id="pending">
+                <label for="pending" class="invoices__actions-filter-label">
+                    <input type="checkbox" id="pending" (change)="filterByStatus($event)">
                     Pending
+                    <span></span>
                 </label>
-                <label for="draft">
-                    <input type="checkbox" id="draft">
+                <label for="draft" class="invoices__actions-filter-label">
+                    <input type="checkbox" id="draft" (change)="filterByStatus($event)">
                     Draft
+                    <span></span>
                 </label>
             </mat-menu>
             <button class="invoices__actions-create" (click)="openSidenav()">
@@ -32,7 +35,7 @@
     </div>
 
     <ul class="invoices__list">
-        @for (invoice of invoices$ | async; track $index) {
+        @for (invoice of filteredInvoices; track $index) {
             <app-invoice-card
                 [id]="invoice.id"
                 [clientName]="invoice.clientName"
