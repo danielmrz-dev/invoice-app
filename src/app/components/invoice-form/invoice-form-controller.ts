@@ -1,4 +1,4 @@
-import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 
 export class InvoiceFormController {
 
@@ -6,36 +6,36 @@ export class InvoiceFormController {
 
     constructor(readonly fb: FormBuilder) {
         this.form = fb.group({
-            createdAt: fb.control('2025-05-23'),
-            paymentDue: fb.control('2025-05-23'),
-            description: fb.control('Teste'),
-            paymentTerms: fb.control(7),
-            clientName: fb.control('Teste'),
-            clientEmail: fb.control('Teste'),
-            status: fb.control('pending'),
+            createdAt: fb.control('', [Validators.required]),
+            paymentDue: fb.control('', [Validators.required]),
+            description: fb.control('', [Validators.required]),
+            paymentTerms: fb.control(null, [Validators.required]),
+            clientName: fb.control('', [Validators.required]),
+            clientEmail: fb.control('', [Validators.required]),
+            status: fb.control('pending', [Validators.required]),
             senderAddress: fb.group({
-                street: fb.control('Teste'),
-                city: fb.control('Teste'),
-                postCode: fb.control('Teste'),
-                country: fb.control('Teste'),
+                street: fb.control('', [Validators.required]),
+                city: fb.control('', [Validators.required]),
+                postCode: fb.control('', [Validators.required]),
+                country: fb.control('', [Validators.required]),
             }),
             clientAddress: fb.group({
-                street:fb.control('Teste'),
-                city:fb.control('Teste'),
-                postCode:fb.control('Teste'),
-                country:fb.control('Teste'),
+                street:fb.control('', [Validators.required]),
+                city:fb.control('', [Validators.required]),
+                postCode:fb.control('', [Validators.required]),
+                country:fb.control('', [Validators.required]),
             }),
             items: fb.array([]),
-            total: fb.control('Teste')
+            total: fb.control('')
         })
     }
 
     addNewItem(item?: any) {
         const group = this.fb.group({
-            name: this.fb.control(item?.name || ''),
-            quantity: this.fb.control(item?.quantity || 0),
-            price: this.fb.control(item?.price || 0),
-            total: this.fb.control(item?.total)
+            name: this.fb.control(item?.name || '', [Validators.required]),
+            quantity: this.fb.control(item?.quantity || 0, [Validators.required]),
+            price: this.fb.control(item?.price || 0, [Validators.required]),
+            total: this.fb.control(item?.total, [Validators.required])
         });
         this.items.push(group);
         group.valueChanges.subscribe((value) => {

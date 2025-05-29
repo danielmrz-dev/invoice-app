@@ -15,26 +15,70 @@
             <div class="form__bill-from-inputs">
                 <label class="form__label form__bill-from-label" for="street">
                     Street Address
-                    <input class="form__input" type="text" id="street" formControlName="street">
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <input 
+                        class="form__input"
+                        [ngClass]="{
+                            'form__input-error': senderStreet.touched && senderStreet.hasError('required')
+                        }"
+                        type="text" 
+                        id="street"
+                        formControlName="street">
+                    <span 
+                        class="form__label-error-msg"
+                        *ngIf="senderStreet.touched && senderStreet.hasError('required')">
+                            can't be empty
+                    </span>
                 </label>
 
                 <label class="form__label form__bill-from-label" for="city">
                     City
-                    <input class="form__input" type="text" id="city" formControlName="city">
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <input 
+                        class="form__input" 
+                        [ngClass]="{
+                            'form__input-error': senderCity.touched && senderCity.hasError('required')
+                        }"
+                        type="text" 
+                        id="city" 
+                        formControlName="city">
+                    <span class="form__label-error-msg" 
+                        *ngIf="senderCity.touched && senderCity.hasError('required')">
+                        can't be empty
+                    </span>
                 </label>
 
                 <label class="form__label form__bill-from-label" for="postCode">
                     Post Code
-                    <input class="form__input" type="text" id="postCode" formControlName="postCode">
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <input 
+                        class="form__input" 
+                        [ngClass]="{
+                            'form__input-error': senderPostCode.touched && senderPostCode.hasError('required')
+                        }"
+                        type="text" 
+                        id="postCode" 
+                        formControlName="postCode">
+                    <span 
+                        class="form__label-error-msg"
+                        *ngIf="senderPostCode.touched && senderPostCode.hasError('required')">
+                        can't be empty
+                    </span>
                 </label>
 
                 <label class="form__label form__bill-from-label" for="country">
                     Country
-                    <input class="form__input" type="text" id="country" formControlName="country">
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <input 
+                        class="form__input"
+                        [ngClass]="{
+                            'form__input-error': senderCountry.touched && senderCountry.hasError('required')
+                        }"
+                        type="text" 
+                        id="country" 
+                        formControlName="country">
+                    <span 
+                        class="form__label-error-msg"
+                        *ngIf="senderCountry.touched && senderCountry.hasError('required')"
+                        >
+                        can't be empty
+                    </span>
                 </label>
             </div>
         </div>
@@ -44,64 +88,171 @@
             <div class="form__bill-to-inputs">
                 <label class="form__label form__bill-to-label" for="clientName">
                     Client's name
-                    <input class="form__input" type="text" id="clientName" formControlName="clientName">
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <input 
+                        class="form__input"
+                        [ngClass]="{
+                            'form__input-error': clientName.touched && clientName.hasError('required')
+                        }"
+                        type="text" 
+                        id="clientName"
+                        formControlName="clientName">
+                    <span class="form__label-error-msg" 
+                        *ngIf="clientName.touched && clientName.hasError('required')"
+                    >
+                        can't be empty
+                    </span>
                 </label>
                 <label class="form__label form__bill-to-label" for="clientEmail">
                     Client's email
-                    <input class="form__input" type="text" id="clientEmail" formControlName="clientEmail">
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <input 
+                        class="form__input"
+                        [ngClass]="{
+                            'form__input-error': clientEmail.touched && clientEmail.hasError('required')
+                        }"
+                        type="text" 
+                        id="clientEmail" 
+                        formControlName="clientEmail">
+                    <span class="form__label-error-msg" 
+                        *ngIf="clientEmail.touched && clientEmail.hasError('required')"
+                    >
+                        can't be empty
+                    </span>
                 </label>
                 <ng-container formGroupName="clientAddress">
                     <label class="form__label form__bill-to-label" for="street">
                         Street Address
-                        <input class="form__input" type="text" id="street" formControlName="street">
-                        <span class="form__label-error-msg">can't be empty</span>
+                        <input 
+                            class="form__input"
+                            [ngClass]="{
+                                'form__input-error': clientStreet.touched && clientStreet.hasError('required')
+                            }"
+                            type="text"
+                            id="street"
+                            formControlName="street">
+                        <span 
+                            class="form__label-error-msg"
+                            *ngIf="clientStreet.touched && clientStreet.hasError('required')"
+                            >
+                            can't be empty
+                        </span>
                     </label>
                     <label class="form__label form__bill-to-label" for="city">
                         City
-                        <input class="form__input" type="text" id="city" formControlName="city">
-                        <span class="form__label-error-msg">can't be empty</span>
+                        <input 
+                            class="form__input"
+                            [ngClass]="{
+                                'form__input-error': clientCity.touched && clientCity.hasError('required')
+                            }"
+                            type="text"
+                            id="city"
+                            formControlName="city">
+                        <span 
+                            class="form__label-error-msg"
+                            *ngIf="clientCity.touched && clientCity.hasError('required')"
+                            >
+                            can't be empty
+                        </span>
                     </label>
                     <label class="form__label form__bill-to-label" for="postCode">
                         Post Code
-                        <input class="form__input" type="text" id="postCode" formControlName="postCode">
-                        <span class="form__label-error-msg">can't be empty</span>
+                        <input 
+                            class="form__input"
+                            [ngClass]="{
+                                'form__input-error': clientPostCode.touched && clientPostCode.hasError('required')
+                            }"
+                            type="text"
+                            id="postCode"
+                            formControlName="postCode">
+                        <span 
+                            class="form__label-error-msg"
+                            *ngIf="clientPostCode.touched && clientPostCode.hasError('required')"
+                            >
+                            can't be empty
+                        </span>
                     </label>
                     <label class="form__label form__bill-to-label" for="country">
                         Country
-                        <input class="form__input" type="text" id="country" formControlName="country">
-                        <span class="form__label-error-msg">can't be empty</span>
+                        <input 
+                            class="form__input"
+                            [ngClass]="{
+                                'form__input-error': clientCountry.touched && clientCountry.hasError('required')
+                            }"
+                            type="text"
+                            id="country"
+                            formControlName="country">
+                        <span 
+                            class="form__label-error-msg"
+                            *ngIf="clientCountry.touched && clientCountry.hasError('required')"
+                            >
+                            can't be empty
+                        </span>
                     </label>
                 </ng-container>
                 
                 <label class="form__label form__bill-to-label" for="invoiceDate">
                     Invoice date
-                    <input class="form__input" type="date" id="invoiceDate" formControlName="createdAt">
+                    <input 
+                        class="form__input"
+                        [ngClass]="{
+                            'form__input-error': createdAt.touched && createdAt.hasError('required')
+                        }"
+                        type="date" 
+                        id="invoiceDate" 
+                        formControlName="createdAt">
                     <span class="form__bill-to-label-span">{{ createdAt.value | date : 'dd MMM yyyy' }}</span>
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <span
+                        class="form__label-error-msg"
+                        *ngIf="createdAt.touched && createdAt.hasError('required')"
+                        >
+                        can't be empty
+                    </span>
                 </label>
                 <label class="form__label form__bill-to-label" for="paymentTerms">
                     Payment Terms
                     <img src="icon-arrow-down.svg" alt="">
-                    <select class="form__input select" id="paymentTerms" formControlName="paymentTerms">
+                    <select 
+                        class="form__input select"
+                        [ngClass]="{
+                            'form__input-error': paymentTerms.touched && paymentTerms.hasError('required')
+                        }"
+                        id="paymentTerms" 
+                        formControlName="paymentTerms">
                         <option class="form__input-option" value="1">Next day</option>
                         <option class="form__input-option" value="7">Next 7 days</option>
                         <option class="form__input-option" value="30">Next 30 days</option>
                     </select>
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <span
+                        class="form__label-error-msg"
+                        *ngIf="paymentTerms.touched && paymentTerms.hasError('required')"
+                        >
+                        can't be empty
+                    </span>
                 </label>
                 <label class="form__label form__bill-to-label" for="description">
                     Project description
-                    <input class="form__input" type="text" id="description" formControlName="description">
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <input 
+                        class="form__input"
+                        [ngClass]="{
+                            'form__input-error': description.touched && description.hasError('required')
+                        }"
+                        type="text" 
+                        id="description" 
+                        formControlName="description">
+                    <span
+                        class="form__label-error-msg"
+                        *ngIf="description.touched && description.hasError('required')"
+                        >
+                        can't be empty
+                    </span>
                 </label>
             </div>
         </div>
 
         <ul class="form__items-list" formArrayName="items">
             <span class="form__section-title">Items</span>
-            <span class="form__items-list-error-msg">You must add at least one item</span>
+            <span class="form__items-list-error-msg" *ngIf="items.length <= 0">
+                You must add at least one item
+            </span>
 
             <li class="form__items-list-item" 
                 *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
@@ -110,23 +261,67 @@
                     class="form__label form__items-list-label" 
                     for="item-{{ i }}">
                         Item Name
-                    <input class="form__input" type="text" id="item-{{ i }}" formControlName="name">
-                    <span class="form__label-error-msg">can't be empty</span>
+                    <input 
+                        class="form__input"
+                        [ngClass]="{
+                            'form__input-error': item.get('name')?.touched && item.get('name')?.hasError('required')
+                        }"
+                        type="text" 
+                        id="item-{{ i }}" 
+                        formControlName="name">
+                    <span 
+                        class="form__label-error-msg"
+                        *ngIf="item.get('name')?.touched && item.get('name')?.hasError('required')"
+                        >
+                        can't be empty
+                    </span>
                 </label>
                 <div class="form__items-list-item-info">
                     <label class="form__label" for="qty">
                         Qty.
-                        <input class="form__input" type="number" id="qty" formControlName="quantity">
-                        <span class="form__label-error-msg">can't be empty</span>
+                        <input 
+                            class="form__input"
+                            [ngClass]="{
+                                'form__input-error': item.get('quantity')?.touched && item.get('quantity')?.hasError('required')
+                            }"
+                            type="number" 
+                            id="qty" 
+                            formControlName="quantity">
+                        <span 
+                            class="form__label-error-msg qty-price"
+                            *ngIf="item.get('quantity')?.touched && item.get('quantity')?.hasError('required')"
+                            >
+                            can't be 0
+                        </span>
                     </label>
                     <label class="form__label" for="price">
                         Price
-                        <input class="form__input" type="text" id="price" formControlName="price" mask="separator.2" thousandSeparator=".">
-                        <span class="form__label-error-msg">can't be empty</span>
+                        <input 
+                            class="form__input"
+                            [ngClass]="{
+                                'form__input-error': item.get('price')?.touched && item.get('price')?.hasError('required')
+                            }"
+                            type="text" 
+                            id="price" 
+                            formControlName="price" 
+                            mask="separator.2" 
+                            thousandSeparator=".">
+                        <span
+                            class="form__label-error-msg qty-price"
+                            *ngIf="item.get('price')?.touched && item.get('price')?.hasError('required')"
+                            >
+                            can't be 0
+                        </span>
                     </label>
                     <label class="form__label" for="total">
                         Total
-                        <input tabindex="-1" class="form__input" type="text" id="total" formControlName="total" readonly>
+                        <input 
+                            tabindex="-1" 
+                            class="form__input" 
+                            type="text" 
+                            id="total" 
+                            formControlName="total" 
+                            readonly>
                     </label>
                     <button class="form__items-list-remove-btn" 
                         (click)="removeItem(i)">
@@ -147,8 +342,8 @@
                     (click)="discardChangesAndClose()">
                     Discard
                 </button>
-                <button class="form__actions-draft" (click)="createNewInvoice('draft')">Save as Draft</button>
-                <button class="form__actions-save" (click)="createNewInvoice('pending')">Save & Send</button>
+                <button [disabled]="form.invalid" class="form__actions-draft" (click)="createNewInvoice('draft')">Save as Draft</button>
+                <button [disabled]="form.invalid" class="form__actions-save" (click)="createNewInvoice('pending')">Save & Send</button>
             </ng-container>
 
             <ng-template #edit>

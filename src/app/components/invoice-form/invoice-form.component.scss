@@ -38,10 +38,13 @@
             pointer-events: none;
         }
         &-error-msg {
-            display: none;
             position: absolute;
             right: 0;
             color: v.$coral-red;
+            &.qty-price {
+                bottom: -20px;
+                left: 1px;
+            }
         }
     }
     &__input {
@@ -54,6 +57,9 @@
         font-weight: bold;
         line-height: .9375rem;
         width: 100%;
+        &-error {
+            outline: 1px solid v.$coral-red;
+        }
         &.select {
             appearance: none;
             -webkit-appearance: none;
@@ -153,11 +159,13 @@
         gap: 22px;
         position: relative;
         &-error-msg {
-            display: none;
             position: absolute;
             right: 1.5rem;
             font-size: 13px;
             color: v.$coral-red;
+            &:nth-child(3) {
+                bottom: 0;
+            }
         }
         &-item {
             display: grid;
