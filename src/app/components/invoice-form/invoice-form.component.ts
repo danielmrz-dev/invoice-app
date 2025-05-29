@@ -10,11 +10,13 @@ import { InvoicesService } from '../../shared/services/invoices.service';
 import { NgxMaskDirective } from 'ngx-mask';
 import { MatSelectModule } from '@angular/material/select';
 import { Invoice, InvoiceStatus } from '../../shared/models/invoice.interface';
+import { EmailValidatorDirective } from '../../shared/validators/email-validator.directive';
+import { UppercaseDirective } from '../../shared/directives/uppercase.directive';
 
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatSelectModule],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatSelectModule, EmailValidatorDirective, UppercaseDirective],
   templateUrl: './invoice-form.component.html',
   styleUrl: './invoice-form.component.scss'
 })
@@ -23,6 +25,10 @@ export class InvoiceFormComponent extends InvoiceFormController {
   formType!: FormType;
   invoiceId: string = '';
   invoice: Invoice = {} as Invoice;
+  textMask = 'A*';
+  customPatterns = {
+    'A': { pattern: new RegExp('[a-zA-ZÀ-ú ]') }
+  }
 
   constructor(
     private readonly sidenavService: SidenavService,

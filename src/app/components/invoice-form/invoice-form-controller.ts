@@ -1,4 +1,5 @@
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { debounceTime, mergeMap } from "rxjs";
 
 export class InvoiceFormController {
 
@@ -33,16 +34,17 @@ export class InvoiceFormController {
     addNewItem(item?: any) {
         const group = this.fb.group({
             name: this.fb.control(item?.name || '', [Validators.required]),
-            quantity: this.fb.control(item?.quantity || 0, [Validators.required]),
-            price: this.fb.control(item?.price || 0, [Validators.required]),
-            total: this.fb.control(item?.total, [Validators.required])
+            quantity: this.fb.control(item?.quantity || null, [Validators.required]),
+            price: this.fb.control(item?.price || null, [Validators.required]),
+            total: this.fb.control(item?.total)
         });
         this.items.push(group);
-        group.valueChanges.subscribe((value) => {
+        group.valueChanges.pipe(
+            debounceTime(200)
+        ).subscribe((value) => {
             const total = value.price * value.quantity;
             group.get('total')?.setValue(total, { emitEvent: false });
         });
-
     }
 
     removeItem(index: number) {

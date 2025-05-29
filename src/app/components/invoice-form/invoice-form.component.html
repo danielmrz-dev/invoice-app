@@ -33,6 +33,8 @@
                 <label class="form__label form__bill-from-label" for="city">
                     City
                     <input 
+                        [mask]="textMask"
+                        [patterns]="customPatterns"
                         class="form__input" 
                         [ngClass]="{
                             'form__input-error': senderCity.touched && senderCity.hasError('required')
@@ -48,7 +50,9 @@
 
                 <label class="form__label form__bill-from-label" for="postCode">
                     Post Code
-                    <input 
+                    <input
+                        appUppercase
+                        mask="AAA AAAA"
                         class="form__input" 
                         [ngClass]="{
                             'form__input-error': senderPostCode.touched && senderPostCode.hasError('required')
@@ -66,6 +70,8 @@
                 <label class="form__label form__bill-from-label" for="country">
                     Country
                     <input 
+                        [mask]="textMask"
+                        [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
                             'form__input-error': senderCountry.touched && senderCountry.hasError('required')
@@ -89,6 +95,8 @@
                 <label class="form__label form__bill-to-label" for="clientName">
                     Client's name
                     <input 
+                        [mask]="textMask"
+                        [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
                             'form__input-error': clientName.touched && clientName.hasError('required')
@@ -106,8 +114,9 @@
                     Client's email
                     <input 
                         class="form__input"
+                        appEmailValidator
                         [ngClass]="{
-                            'form__input-error': clientEmail.touched && clientEmail.hasError('required')
+                            'form__input-error': (clientEmail.touched && clientEmail.hasError('required')) || (!clientEmail.hasError('required') && clientEmail.hasError('invalidEmail'))
                         }"
                         type="text" 
                         id="clientEmail" 
@@ -117,11 +126,16 @@
                     >
                         can't be empty
                     </span>
+                    <span class="form__label-error-msg" 
+                        *ngIf="!clientEmail.hasError('required') && clientEmail.hasError('invalidEmail')"
+                    >
+                        invalid email
+                    </span>
                 </label>
                 <ng-container formGroupName="clientAddress">
                     <label class="form__label form__bill-to-label" for="street">
                         Street Address
-                        <input 
+                        <input
                             class="form__input"
                             [ngClass]="{
                                 'form__input-error': clientStreet.touched && clientStreet.hasError('required')
@@ -138,7 +152,9 @@
                     </label>
                     <label class="form__label form__bill-to-label" for="city">
                         City
-                        <input 
+                        <input
+                            [mask]="textMask"
+                            [patterns]="customPatterns"
                             class="form__input"
                             [ngClass]="{
                                 'form__input-error': clientCity.touched && clientCity.hasError('required')
@@ -155,7 +171,9 @@
                     </label>
                     <label class="form__label form__bill-to-label" for="postCode">
                         Post Code
-                        <input 
+                        <input
+                            appUppercase
+                            mask="AAA AAA"
                             class="form__input"
                             [ngClass]="{
                                 'form__input-error': clientPostCode.touched && clientPostCode.hasError('required')
@@ -172,7 +190,9 @@
                     </label>
                     <label class="form__label form__bill-to-label" for="country">
                         Country
-                        <input 
+                        <input
+                            [mask]="textMask"
+                            [patterns]="customPatterns"
                             class="form__input"
                             [ngClass]="{
                                 'form__input-error': clientCountry.touched && clientCountry.hasError('required')
@@ -230,7 +250,9 @@
                 </label>
                 <label class="form__label form__bill-to-label" for="description">
                     Project description
-                    <input 
+                    <input
+                        [mask]="textMask"
+                        [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
                             'form__input-error': description.touched && description.hasError('required')
@@ -261,7 +283,9 @@
                     class="form__label form__items-list-label" 
                     for="item-{{ i }}">
                         Item Name
-                    <input 
+                    <input
+                        [mask]="textMask"
+                        [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
                             'form__input-error': item.get('name')?.touched && item.get('name')?.hasError('required')
@@ -279,7 +303,8 @@
                 <div class="form__items-list-item-info">
                     <label class="form__label" for="qty">
                         Qty.
-                        <input 
+                        <input
+                            mask="00"
                             class="form__input"
                             [ngClass]="{
                                 'form__input-error': item.get('quantity')?.touched && item.get('quantity')?.hasError('required')
@@ -296,16 +321,17 @@
                     </label>
                     <label class="form__label" for="price">
                         Price
-                        <input 
+                        <input
+                            prefix="£ "
+                            mask="separator.2" 
+                            thousandSeparator="."
                             class="form__input"
                             [ngClass]="{
                                 'form__input-error': item.get('price')?.touched && item.get('price')?.hasError('required')
                             }"
                             type="text" 
                             id="price" 
-                            formControlName="price" 
-                            mask="separator.2" 
-                            thousandSeparator=".">
+                            formControlName="price" >
                         <span
                             class="form__label-error-msg qty-price"
                             *ngIf="item.get('price')?.touched && item.get('price')?.hasError('required')"
@@ -320,7 +346,10 @@
                             class="form__input" 
                             type="text" 
                             id="total" 
-                            formControlName="total" 
+                            formControlName="total"
+                            prefix="£ "
+                            mask="separator.2" 
+                            thousandSeparator="."                            
                             readonly>
                     </label>
                     <button class="form__items-list-remove-btn" 
