@@ -2,13 +2,12 @@ import { Component, Input } from '@angular/core';
 import { InvoiceStatus } from '../../shared/models/invoice.interface';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { InvoiceStatusColorDirective } from '../../shared/directives/invoice-status-color.directive';
 import { StatusColoredTagComponent } from "../status-colored-tag/status-colored-tag.component";
 
 @Component({
   selector: 'app-invoice-card',
   standalone: true,
-  imports: [CommonModule, InvoiceStatusColorDirective, RouterLink, StatusColoredTagComponent],
+  imports: [CommonModule, RouterLink, StatusColoredTagComponent],
   templateUrl: './invoice-card.component.html',
   styleUrl: './invoice-card.component.scss'
 })

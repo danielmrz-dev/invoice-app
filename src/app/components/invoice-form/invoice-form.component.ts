@@ -12,11 +12,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { Invoice, InvoiceStatus } from '../../shared/models/invoice.interface';
 import { EmailValidatorDirective } from '../../shared/validators/email-validator.directive';
 import { UppercaseDirective } from '../../shared/directives/uppercase.directive';
+import { MinItemsValidatorDirective } from '../../shared/directives/min-items-validator.directive';
+import { OnlyLettersDirective } from '../../shared/directives/only-letters.directive';
+import { MinQtyOrPriceDirective } from '../../shared/directives/min-qty-or-price.directive';
 
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatSelectModule, EmailValidatorDirective, UppercaseDirective],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatSelectModule, EmailValidatorDirective, UppercaseDirective, MinItemsValidatorDirective, OnlyLettersDirective, MinQtyOrPriceDirective],
   templateUrl: './invoice-form.component.html',
   styleUrl: './invoice-form.component.scss'
 })
@@ -76,7 +79,10 @@ export class InvoiceFormComponent extends InvoiceFormController {
           total: invoice?.total
         })
 
-        invoice?.items.forEach((item) => this.addNewItem(item));
+        invoice?.items.forEach((item) => {
+          item.total = item.price * item.quantity;
+          return this.addNewItem(item)
+        });
 
       }
     })

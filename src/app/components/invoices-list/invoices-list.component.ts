@@ -31,7 +31,7 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
     private readonly invoicesService: InvoicesService,
     private readonly sidenavService: SidenavService,
     private readonly router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.invoicesService.invoices$.subscribe((invoices) => {
@@ -46,12 +46,12 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.invoicesAmountSub.unsubscribe();
   }
-  
+
   openSidenav() {
     this.router.navigate([
       { outlets: { sidenav: ['new-invoice'] } }
     ]);
-    this.sidenavService.toggleSidenav();
+    this.sidenavService.openSidenav();
   }
 
   filterByStatus(event: Event) {

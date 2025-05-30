@@ -15,7 +15,7 @@
             <div class="form__bill-from-inputs">
                 <label class="form__label form__bill-from-label" for="street">
                     Street Address
-                    <input 
+                    <input
                         class="form__input"
                         [ngClass]="{
                             'form__input-error': senderStreet.touched && senderStreet.hasError('required')
@@ -51,11 +51,11 @@
                 <label class="form__label form__bill-from-label" for="postCode">
                     Post Code
                     <input
+                        maxlength="10"
                         appUppercase
-                        mask="AAA AAAA"
                         class="form__input" 
                         [ngClass]="{
-                            'form__input-error': senderPostCode.touched && senderPostCode.hasError('required')
+                            'form__input-error': (senderPostCode.touched && senderPostCode.hasError('required')) || (!senderPostCode.hasError('required') && senderPostCode.hasError('minlength'))
                         }"
                         type="text" 
                         id="postCode" 
@@ -64,6 +64,11 @@
                         class="form__label-error-msg"
                         *ngIf="senderPostCode.touched && senderPostCode.hasError('required')">
                         can't be empty
+                    </span>
+                    <span 
+                        class="form__label-error-msg"
+                        *ngIf="!senderPostCode.hasError('required') && senderPostCode.hasError('minlength')">
+                        too short
                     </span>
                 </label>
 
@@ -173,10 +178,10 @@
                         Post Code
                         <input
                             appUppercase
-                            mask="AAA AAA"
+                            maxlength="10"
                             class="form__input"
                             [ngClass]="{
-                                'form__input-error': clientPostCode.touched && clientPostCode.hasError('required')
+                                'form__input-error': (clientPostCode.touched && clientPostCode.hasError('required')) || (!clientPostCode.hasError('required') && clientPostCode.hasError('minlength'))
                             }"
                             type="text"
                             id="postCode"
@@ -186,6 +191,12 @@
                             *ngIf="clientPostCode.touched && clientPostCode.hasError('required')"
                             >
                             can't be empty
+                        </span>
+                        <span 
+                            class="form__label-error-msg"
+                            *ngIf="!clientPostCode.hasError('required') && clientPostCode.hasError('minlength')"
+                            >
+                            too short
                         </span>
                     </label>
                     <label class="form__label form__bill-to-label" for="country">
@@ -270,7 +281,7 @@
             </div>
         </div>
 
-        <ul class="form__items-list" formArrayName="items">
+        <ul class="form__items-list" formArrayName="items" appMinItemsValidator>
             <span class="form__section-title">Items</span>
             <span class="form__items-list-error-msg" *ngIf="items.length <= 0">
                 You must add at least one item
@@ -304,17 +315,18 @@
                     <label class="form__label" for="qty">
                         Qty.
                         <input
-                            mask="00"
+                            appOnlyLetters
+                            appMinQtyOrPrice
                             class="form__input"
                             [ngClass]="{
-                                'form__input-error': item.get('quantity')?.touched && item.get('quantity')?.hasError('required')
+                                'form__input-error': (item.get('quantity')?.touched && item.get('quantity')?.hasError('required')) || (!item.get('quantity')?.hasError('required') && item.get('quantity')?.hasError('minQtyOrPrice'))
                             }"
-                            type="number" 
+                            type="text" 
                             id="qty" 
                             formControlName="quantity">
                         <span 
                             class="form__label-error-msg qty-price"
-                            *ngIf="item.get('quantity')?.touched && item.get('quantity')?.hasError('required')"
+                            *ngIf="(item.get('quantity')?.touched && item.get('quantity')?.hasError('required')) || (!item.get('quantity')?.hasError('required') && item.get('quantity')?.hasError('minQtyOrPrice'))"
                             >
                             can't be 0
                         </span>
@@ -322,19 +334,17 @@
                     <label class="form__label" for="price">
                         Price
                         <input
-                            prefix="£ "
-                            mask="separator.2" 
-                            thousandSeparator="."
+                            appOnlyLetters
                             class="form__input"
                             [ngClass]="{
-                                'form__input-error': item.get('price')?.touched && item.get('price')?.hasError('required')
+                                'form__input-error': (item.get('price')?.touched && item.get('price')?.hasError('required')) || (!item.get('price')?.hasError('required') && item.get('price')?.hasError('minQtyOrPrice'))
                             }"
                             type="text" 
                             id="price" 
                             formControlName="price" >
                         <span
                             class="form__label-error-msg qty-price"
-                            *ngIf="item.get('price')?.touched && item.get('price')?.hasError('required')"
+                            *ngIf="(item.get('price')?.touched && item.get('price')?.hasError('required')) || (!item.get('price')?.hasError('required') && item.get('price')?.hasError('minQtyOrPrice'))"
                             >
                             can't be 0
                         </span>
@@ -347,9 +357,6 @@
                             type="text" 
                             id="total" 
                             formControlName="total"
-                            prefix="£ "
-                            mask="separator.2" 
-                            thousandSeparator="."                            
                             readonly>
                     </label>
                     <button class="form__items-list-remove-btn" 
@@ -377,7 +384,7 @@
 
             <ng-template #edit>
                 <button class="form__actions-cancel" (click)="discardChangesAndClose()">Cancel</button>
-                <button class="form__actions-save" [disabled]="form.untouched" (click)="editInvoice(invoiceId)">
+                <button class="form__actions-save" [disabled]="form.untouched || form.invalid" (click)="editInvoice(invoiceId)">
                     Save changes
                 </button>
             </ng-template>

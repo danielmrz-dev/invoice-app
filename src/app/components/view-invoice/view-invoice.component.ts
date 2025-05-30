@@ -50,18 +50,19 @@ export class ViewInvoiceComponent implements OnInit {
     this.router.navigate([
       { outlets: { sidenav: ['edit-invoice', this.invoice?.id] } }
     ]);
-    this.sidenavService.toggleSidenav();
+    this.sidenavService.openSidenav();
   }
 
   deleteInvoice() {
     this.dialog.open(ConfirmationModalComponent, {
       data: {
         confirmDelete: true,
+        markAsPaid: false,
         invoiceId: this.invoice?.id
       }
     }).afterClosed().subscribe((result) => {
-      if (result === 'delete' && this.invoice?.id) {
-        this.invoicesService.deleteInvoice(this.invoice.id);
+      if (result === 'delete') {
+        this.invoicesService.deleteInvoice(this.invoice!.id);
         this.router.navigate(['/invoices']);
       }
     })
@@ -70,15 +71,16 @@ export class ViewInvoiceComponent implements OnInit {
   markInvoiceAsPaid() {
     if (this.invoice) {
       this.dialog.open(ConfirmationModalComponent, {
-      data: {
-        markAsPaid: true,
-        invoiceId: this.invoice?.id
-      }
-    }).afterClosed().subscribe((result) => {
-      if (result === 'confirm' && this.invoice?.id) {
-        this.invoicesService.markInvoiceAsPaid(this.invoice);
-      }
-    })
+        data: {
+          confirmDelete: false,
+          markAsPaid: true,
+          invoiceId: this.invoice?.id
+        }
+      }).afterClosed().subscribe((result) => {
+        if (result === 'confirm' && this.invoice?.id) {
+          this.invoicesService.markInvoiceAsPaid(this.invoice);
+        }
+      })
     }
   }
 }

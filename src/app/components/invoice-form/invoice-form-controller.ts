@@ -1,5 +1,5 @@
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { debounceTime, mergeMap } from "rxjs";
+import { debounceTime, exhaustMap, mergeMap } from "rxjs";
 
 export class InvoiceFormController {
 
@@ -8,7 +8,7 @@ export class InvoiceFormController {
     constructor(readonly fb: FormBuilder) {
         this.form = fb.group({
             createdAt: fb.control('', [Validators.required]),
-            paymentDue: fb.control('', [Validators.required]),
+            paymentDue: fb.control(''),
             description: fb.control('', [Validators.required]),
             paymentTerms: fb.control(null, [Validators.required]),
             clientName: fb.control('', [Validators.required]),
@@ -17,16 +17,16 @@ export class InvoiceFormController {
             senderAddress: fb.group({
                 street: fb.control('', [Validators.required]),
                 city: fb.control('', [Validators.required]),
-                postCode: fb.control('', [Validators.required]),
+                postCode: fb.control('', [Validators.required, Validators.minLength(7)]),
                 country: fb.control('', [Validators.required]),
             }),
             clientAddress: fb.group({
                 street:fb.control('', [Validators.required]),
                 city:fb.control('', [Validators.required]),
-                postCode:fb.control('', [Validators.required]),
+                postCode:fb.control('', [Validators.required, Validators.minLength(7)]),
                 country:fb.control('', [Validators.required]),
             }),
-            items: fb.array([]),
+            items: fb.array([], [Validators.required]),
             total: fb.control('')
         })
     }
@@ -34,16 +34,18 @@ export class InvoiceFormController {
     addNewItem(item?: any) {
         const group = this.fb.group({
             name: this.fb.control(item?.name || '', [Validators.required]),
-            quantity: this.fb.control(item?.quantity || null, [Validators.required]),
-            price: this.fb.control(item?.price || null, [Validators.required]),
-            total: this.fb.control(item?.total)
+            quantity: this.fb.control(item?.quantity || '', [Validators.required]),
+            price: this.fb.control(item?.price || '', [Validators.required]),
+            total: this.fb.control({ value: item?.total || '', disabled: true })
         });
         this.items.push(group);
         group.valueChanges.pipe(
-            debounceTime(200)
+            debounceTime(200),
         ).subscribe((value) => {
-            const total = value.price * value.quantity;
-            group.get('total')?.setValue(total, { emitEvent: false });
+            const total = parseFloat(value.price) * parseFloat(value.quantity);
+            const totalFormatted = total ? `£ ${total.toFixed(2)}` : '';
+            group.get('total')?.setValue(totalFormatted, { emitEvent: false });
+            group.get('total')?.updateValueAndValidity({ onlySelf: true, emitEvent: false });
         });
     }
 
