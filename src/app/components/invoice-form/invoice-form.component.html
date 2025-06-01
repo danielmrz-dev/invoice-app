@@ -121,18 +121,13 @@
                         class="form__input"
                         appEmailValidator
                         [ngClass]="{
-                            'form__input-error': (clientEmail.touched && clientEmail.hasError('required')) || (!clientEmail.hasError('required') && clientEmail.hasError('invalidEmail'))
+                            'form__input-error': clientEmail.touched && clientEmail.hasError('invalidEmail')
                         }"
                         type="text" 
                         id="clientEmail" 
                         formControlName="clientEmail">
                     <span class="form__label-error-msg" 
-                        *ngIf="clientEmail.touched && clientEmail.hasError('required')"
-                    >
-                        can't be empty
-                    </span>
-                    <span class="form__label-error-msg" 
-                        *ngIf="!clientEmail.hasError('required') && clientEmail.hasError('invalidEmail')"
+                        *ngIf="clientEmail.touched && clientEmail.hasError('invalidEmail')"
                     >
                         invalid email
                     </span>
@@ -142,18 +137,9 @@
                         Street Address
                         <input
                             class="form__input"
-                            [ngClass]="{
-                                'form__input-error': clientStreet.touched && clientStreet.hasError('required')
-                            }"
                             type="text"
                             id="street"
                             formControlName="street">
-                        <span 
-                            class="form__label-error-msg"
-                            *ngIf="clientStreet.touched && clientStreet.hasError('required')"
-                            >
-                            can't be empty
-                        </span>
                     </label>
                     <label class="form__label form__bill-to-label" for="city">
                         City
@@ -161,18 +147,9 @@
                             [mask]="textMask"
                             [patterns]="customPatterns"
                             class="form__input"
-                            [ngClass]="{
-                                'form__input-error': clientCity.touched && clientCity.hasError('required')
-                            }"
                             type="text"
                             id="city"
                             formControlName="city">
-                        <span 
-                            class="form__label-error-msg"
-                            *ngIf="clientCity.touched && clientCity.hasError('required')"
-                            >
-                            can't be empty
-                        </span>
                     </label>
                     <label class="form__label form__bill-to-label" for="postCode">
                         Post Code
@@ -181,20 +158,14 @@
                             maxlength="10"
                             class="form__input"
                             [ngClass]="{
-                                'form__input-error': (clientPostCode.touched && clientPostCode.hasError('required')) || (!clientPostCode.hasError('required') && clientPostCode.hasError('minlength'))
+                                'form__input-error': (clientPostCode.touched && clientPostCode.hasError('minlength'))
                             }"
                             type="text"
                             id="postCode"
                             formControlName="postCode">
                         <span 
                             class="form__label-error-msg"
-                            *ngIf="clientPostCode.touched && clientPostCode.hasError('required')"
-                            >
-                            can't be empty
-                        </span>
-                        <span 
-                            class="form__label-error-msg"
-                            *ngIf="!clientPostCode.hasError('required') && clientPostCode.hasError('minlength')"
+                            *ngIf="clientPostCode.touched && clientPostCode.hasError('minlength')"
                             >
                             too short
                         </span>
@@ -205,18 +176,9 @@
                             [mask]="textMask"
                             [patterns]="customPatterns"
                             class="form__input"
-                            [ngClass]="{
-                                'form__input-error': clientCountry.touched && clientCountry.hasError('required')
-                            }"
                             type="text"
                             id="country"
                             formControlName="country">
-                        <span 
-                            class="form__label-error-msg"
-                            *ngIf="clientCountry.touched && clientCountry.hasError('required')"
-                            >
-                            can't be empty
-                        </span>
                     </label>
                 </ng-container>
                 
