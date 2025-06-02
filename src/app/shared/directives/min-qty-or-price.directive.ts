@@ -16,7 +16,10 @@ export class MinQtyOrPriceDirective implements Validator {
 
   validate(control: AbstractControl): ValidationErrors | null {
 
-    const INVALID_NUMBER = control.value?.trim().length <= 0;
+    if (!control.value) return null;
+
+    const value = (control.value).toString();
+    const INVALID_NUMBER = value.trim().length === 0;
     return INVALID_NUMBER ? { minQtyOrPrice: true } : null;
 
   }
