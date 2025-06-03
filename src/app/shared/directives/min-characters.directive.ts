@@ -15,7 +15,12 @@ import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from '@an
 export class MinCharactersDirective implements Validator {
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return null
+
+    if (!control.value || control.value.length === 0) return null;
+
+    const trimmedValue = control.value.trim();
+
+    return trimmedValue.length > 0 ? null : { invalidValue: true }
   }
 
 }

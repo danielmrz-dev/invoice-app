@@ -16,34 +16,36 @@
                 <label class="form__label form__bill-from-label" for="street">
                     Street Address
                     <input
+                        appMinCharacters
                         class="form__input"
                         [ngClass]="{
-                            'form__input-error': senderStreet.touched && senderStreet.hasError('required')
+                            'form__input-error': (senderStreet.touched && senderStreet.hasError('required')) || (!senderStreet.hasError('required') && senderStreet.hasError('invalidValue'))
                         }"
                         type="text" 
                         id="street"
                         formControlName="street">
                     <span 
                         class="form__label-error-msg"
-                        *ngIf="senderStreet.touched && senderStreet.hasError('required')">
+                        *ngIf="(senderStreet.touched && senderStreet.hasError('required')) || (!senderStreet.hasError('required') && senderStreet.hasError('invalidValue'))">
                             can't be empty
                     </span>
                 </label>
 
                 <label class="form__label form__bill-from-label" for="city">
                     City
-                    <input 
+                    <input
+                        appMinCharacters
                         [mask]="textMask"
                         [patterns]="customPatterns"
                         class="form__input" 
                         [ngClass]="{
-                            'form__input-error': senderCity.touched && senderCity.hasError('required')
+                            'form__input-error': (senderCity.touched && senderCity.hasError('required')) || (!senderCity.hasError('required') && (senderCity.hasError('minlength') || senderCity.hasError('invalidValue')))
                         }"
                         type="text" 
                         id="city" 
                         formControlName="city">
                     <span class="form__label-error-msg" 
-                        *ngIf="senderCity.touched && senderCity.hasError('required')">
+                        *ngIf="(senderCity.touched && senderCity.hasError('required')) || (!senderCity.hasError('required') && (senderCity.hasError('minlength') || senderCity.hasError('invalidValue')))">
                         can't be empty
                     </span>
                 </label>
@@ -51,11 +53,12 @@
                 <label class="form__label form__bill-from-label" for="postCode">
                     Post Code
                     <input
+                        appMinCharacters
                         maxlength="10"
                         appUppercase
                         class="form__input" 
                         [ngClass]="{
-                            'form__input-error': (senderPostCode.touched && senderPostCode.hasError('required')) || (!senderPostCode.hasError('required') && senderPostCode.hasError('minlength'))
+                            'form__input-error': (senderPostCode.touched && senderPostCode.hasError('required')) || (!senderPostCode.hasError('required') && (senderPostCode.hasError('minlength') || senderPostCode.hasError('invalidValue')))
                         }"
                         type="text" 
                         id="postCode" 
@@ -75,18 +78,19 @@
                 <label class="form__label form__bill-from-label" for="country">
                     Country
                     <input 
+                        appMinCharacters
                         [mask]="textMask"
                         [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
-                            'form__input-error': senderCountry.touched && senderCountry.hasError('required')
+                            'form__input-error': (senderCountry.touched && senderCountry.hasError('required')) || (!senderCountry.hasError('required') && (senderCountry.hasError('minlength') || senderCountry.hasError('invalidValue')))
                         }"
                         type="text" 
                         id="country" 
                         formControlName="country">
                     <span 
                         class="form__label-error-msg"
-                        *ngIf="senderCountry.touched && senderCountry.hasError('required')"
+                        *ngIf="(senderCountry.touched && senderCountry.hasError('required')) || (!senderCountry.hasError('required') && (senderCountry.hasError('minlength') || senderCountry.hasError('invalidValue')))"
                         >
                         can't be empty
                     </span>
@@ -158,14 +162,14 @@
                             maxlength="10"
                             class="form__input"
                             [ngClass]="{
-                                'form__input-error': (clientPostCode.touched && clientPostCode.hasError('minlength'))
+                                'form__input-error': (clientPostCode.touched && clientPostCode.hasError('required')) || (!clientPostCode.hasError('required') && (clientPostCode.hasError('minlength') || clientPostCode.hasError('invalidValue')))
                             }"
                             type="text"
                             id="postCode"
                             formControlName="postCode">
                         <span 
                             class="form__label-error-msg"
-                            *ngIf="clientPostCode.touched && clientPostCode.hasError('minlength')"
+                            *ngIf="(clientPostCode.touched && clientPostCode.hasError('required')) || (!clientPostCode.hasError('required') && (clientPostCode.hasError('minlength') || clientPostCode.hasError('invalidValue')))"
                             >
                             too short
                         </span>
@@ -257,18 +261,19 @@
                     for="item-{{ i }}">
                         Item Name
                     <input
+                        appMinCharacters
                         [mask]="textMask"
                         [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
-                            'form__input-error': item.get('name')?.touched && item.get('name')?.hasError('required')
+                            'form__input-error': (item.get('name')?.touched && item.get('name')?.hasError('required')) || (!item.get('name')?.hasError('required') && (item.get('name')?.hasError('minlength') || item.get('name')?.hasError('invalidValue')))
                         }"
                         type="text" 
                         id="item-{{ i }}" 
                         formControlName="name">
                     <span 
                         class="form__label-error-msg"
-                        *ngIf="item.get('name')?.touched && item.get('name')?.hasError('required')"
+                        *ngIf="(item.get('name')?.touched && item.get('name')?.hasError('required')) || (!item.get('name')?.hasError('required') && (item.get('name')?.hasError('minlength') || item.get('name')?.hasError('invalidValue')))"
                         >
                         can't be empty
                     </span>

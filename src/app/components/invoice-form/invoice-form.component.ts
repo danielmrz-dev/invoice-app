@@ -15,11 +15,12 @@ import { UppercaseDirective } from '../../shared/directives/uppercase.directive'
 import { MinItemsValidatorDirective } from '../../shared/directives/min-items-validator.directive';
 import { OnlyLettersDirective } from '../../shared/directives/only-letters.directive';
 import { MinQtyOrPriceDirective } from '../../shared/directives/min-qty-or-price.directive';
+import { MinCharactersDirective } from '../../shared/directives/min-characters.directive';
 
 @Component({
   selector: 'app-invoice-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatSelectModule, EmailValidatorDirective, UppercaseDirective, MinItemsValidatorDirective, OnlyLettersDirective, MinQtyOrPriceDirective],
+  imports: [ReactiveFormsModule, CommonModule, NgxMaskDirective, MatSelectModule, EmailValidatorDirective, UppercaseDirective, MinItemsValidatorDirective, OnlyLettersDirective, MinQtyOrPriceDirective, MinCharactersDirective],
   templateUrl: './invoice-form.component.html',
   styleUrl: './invoice-form.component.scss'
 })
