@@ -110,6 +110,9 @@
         background-color: v.$night-blue-hover;
         border-radius: 8px;
         overflow: hidden;
+        &-table-head {
+            display: none;
+        }
         &-items {
             display: flex;
             flex-direction: column;
@@ -160,6 +163,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        &.header{ 
+            display: none;
+        }
         &-btn {
             &-edit {
                 @include m.actionBtnColors(v.$night-blue-hover)
@@ -177,5 +183,94 @@
         text-align: center;
         margin: 1rem auto;
     }
+}
 
+@media screen and (min-width: 768px) {
+    .view-invoice {
+        max-width: 668px;
+        margin: 3.0625rem auto;
+        &__status {
+            justify-content: space-between;
+            app-status-colored-tag {
+                margin: 0 auto 0 1.25rem;
+            }
+        }
+        &__info-container {
+            gap: 24px;
+        }
+        &__info {
+            padding: 33px;
+            &-data {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                &-id {
+                    line-height: 24px;
+                }
+                &-address {
+                    justify-self: end;
+                    text-align: end;
+                }
+            }
+        }
+        &__client {
+            grid-area: 2 / 1 / 3 / 3;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            &-info {
+                display: flex;
+                flex-direction: column;
+                gap: .8125rem;
+                &.sent-to {
+                    grid-area: 1 / 3 / 2 / 4;
+                }
+                &-title {
+                    font-size: 13px;
+                    line-height: 15px;
+                }
+            }
+        }
+        &__summary {
+            grid-area: 3 / 1 / 4 / 3;
+            &-table-head {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                justify-content: space-between;
+                color: v.$white;
+                span:not(:first-child) {
+                    justify-self: end;
+                }
+            }
+            &-items {
+                gap: 2rem;
+            }
+            &-item {
+                grid-template-columns: 220px 150px 1fr;
+                color: v.$white;
+                &-name {
+                    grid-area: 1 / 1;
+                }
+                &-price {
+                    grid-area: 1 / 2;
+                    display: flex;
+                    justify-content: space-between;
+                    color: v.$white;
+                }
+                &-total {
+                    grid-area: 1 / 3;
+                }
+            }
+        }
+        &__actions {
+            &.header{ 
+                padding: 0;
+                display: flex;
+                gap: .5rem;
+            }
+            &.footer{ 
+                display: none;
+            }
+
+        }
+    }
 }

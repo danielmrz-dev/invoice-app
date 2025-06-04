@@ -9,5 +9,11 @@
 .sidenav {
   width: 100%;
   background-color: v.$dark-blue;
-  // padding: 1.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .sidenav {
+    width: 616px;
+    padding: 2rem;
+  }
 }

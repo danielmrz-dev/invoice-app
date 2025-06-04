@@ -10,6 +10,18 @@
             <div class="view-invoice__status">
                 <p>Status</p>
                 <app-status-colored-tag [status]="invoice.status" />
+                <div class="view-invoice__actions header">
+                    <button class="view-invoice__actions-btn-edit" (click)="openEditForm()">
+                        Edit
+                    </button>
+                    <button class="view-invoice__actions-btn-delete" (click)="deleteInvoice()">
+                        Delete
+                    </button>
+                    <button class="view-invoice__actions-btn-mark-as-paid" (click)="markInvoiceAsPaid()"
+                        [disabled]="invoice.status === 'paid'">
+                        Mark as paid
+                    </button>
+                </div>
             </div>
 
             <div class="view-invoice__info">
@@ -81,16 +93,21 @@
 
                     <div class="view-invoice__summary">
                         <div class="view-invoice__summary-items">
-                            <div class="view-invoice__summary-item"
-                                *ngFor="let item of invoice.items">
+                            <div class="view-invoice__summary-table-head">
+                                <span>Item name</span>
+                                <span>QTY.</span>
+                                <span>Price</span>
+                                <span>Total</span>
+                            </div>
+                            <div class="view-invoice__summary-item" *ngFor="let item of invoice.items">
                                 <span class="view-invoice__summary-item-name">
                                     {{ item.name }}
                                 </span>
                                 <span class="view-invoice__summary-item-price">
-                                    {{ item.quantity }} x {{ item.price | currency : 'GBP' : '£ ' }}
+                                    {{ item.quantity }} x <span>{{ item.price | currency : 'GBP' : '£ ' }}</span>
                                 </span>
-                                <span class="view-invoice__summary-item-total"> 
-                                    {{ item.total | currency : 'GBP' : '£ ' }} 
+                                <span class="view-invoice__summary-item-total">
+                                    {{ (item.quantity * item.price) | currency : 'GBP' : '£ ' }}
                                 </span>
                             </div>
                         </div>
@@ -109,14 +126,15 @@
             </div>
         </div>
 
-        <div class="view-invoice__actions">
+        <div class="view-invoice__actions footer">
             <button class="view-invoice__actions-btn-edit" (click)="openEditForm()">
                 Edit
             </button>
             <button class="view-invoice__actions-btn-delete" (click)="deleteInvoice()">
                 Delete
             </button>
-            <button class="view-invoice__actions-btn-mark-as-paid" (click)="markInvoiceAsPaid()" [disabled]="invoice.status === 'paid'">
+            <button class="view-invoice__actions-btn-mark-as-paid" (click)="markInvoiceAsPaid()"
+                [disabled]="invoice.status === 'paid'">
                 Mark as paid
             </button>
         </div>
