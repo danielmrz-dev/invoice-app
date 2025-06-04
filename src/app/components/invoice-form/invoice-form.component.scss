@@ -65,6 +65,7 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             padding-right: 30px;
+            height: 100%;
             cursor: pointer;
 
         }
@@ -240,231 +241,75 @@
         display: none;
     }
     .form {
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
-        overflow: hidden;
+        margin: 0 auto 8rem;
+        position: relative;
         &__title {
-            color: v.$white;
-            font-size: 1.5rem;
-            line-height: 2rem;
-            padding: 0 1.5rem;
-            span {
-                color: v.$blue-gray;
-            }
+            padding: 3.6875rem 3.5rem 1.5rem;
         }
         &__label {
-            font-size: .8125rem;
-            line-height: .9375rem;
-            color: v.$blue-gray;
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
-            position: relative;
-            img {
-                z-index: 1;
-                width: 15px;
-                position: absolute;
-                bottom: 18px;
-                right: 15px;
-                pointer-events: none;
-            }
-            &-error-msg {
-                position: absolute;
-                right: 0;
-                color: v.$coral-red;
-                &.qty-price {
-                    bottom: -20px;
-                    left: 1px;
-                }
-            }
-        }
-        &__input {
-            border-radius: .25rem;
-            background-color: v.$night-blue;
-            border: none;
-            padding: 18px 20px 15px;
-            color: v.$white;
-            font-size: .9375rem;
-            font-weight: bold;
-            line-height: .9375rem;
-            width: 100%;
-            &-error {
-                outline: 1px solid v.$coral-red;
-            }
-            &.select {
-                appearance: none;
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                padding-right: 30px;
-                cursor: pointer;
-
-            }
-            &[type="date"] {
-                color: transparent;
-                &::-webkit-calendar-picker-indicator {
-                    filter: invert(1);
-                }
-            }
-            &[readonly] {
-                background-color: transparent;
-                padding-inline: 0;
-                color: v.$blue-gray;
-                border: none;
-                outline: none;
-            }
-            &-option {
-                font-weight: bold;
-            }
-        }
-        &__section-title {
-            grid-area: 1 / 1 / 2 / 3;
-            color: v.$violet-blue;
-            font-size: .9375rem;
-            font-weight: bold;
-            line-height: .9375rem;
+            color: v.$light-blue;
         }
         &__bill-from {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            padding: 0 1.5rem;
+            padding: 0 3.5rem;
             &-inputs {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
+                grid-template-columns: repeat(3, 1fr);
                 label {
                     &:nth-child(1) {
-                        grid-area: 1 / 1 / 2 / 3;
+                        grid-area: 1 / 1 / 2 / 4;
                     }
                     &:nth-child(4) {
-                        grid-area: 3 / 1 / 4 / 3;
+                        grid-area: 2 / 3 / 3 / 4;
                     }
                 }
             }
         }
         &__bill-to {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            margin-top: 1.25rem;
-            padding: 0 1.5rem;
-            &-label-span {
-                position: absolute;
-                bottom: 17px;
-                left: 21px;
-                letter-spacing: 0.5px;
-                color: v.$white;
-                font-size: 15px;
-                font-weight: bold;
-            }
+            padding: 0 3.5rem;
             &-inputs {
                 display: grid;
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(3, 1fr);
                 gap: 24px;
                 label {
                     &:nth-child(1),
                     &:nth-child(2),
                     &:nth-child(3),
-                    &:nth-child(6),
-                    &:nth-child(7),
-                    &:nth-child(8),
                     &:nth-child(9)
                     {
-                        grid-column: 1 / 3;
+                        grid-column: 1 / 4;
                     }
-                    position: relative;
-                    &-error-msg {
-                        position: absolute;
-                        right: 0;
-                        color: v.$coral-red;
+                    &:nth-child(6) {
+                        grid-column: 3 / 4;
                     }
-                    
+                    &:nth-child(7) {
+                        grid-area: 5 / 1 / 6 / 3;
+                        width: 73%;
+                    }
+                    &:nth-child(8) {
+                        grid-area: 5 / 2 / 6 / 4;
+                        justify-self: end;
+                        width: 73%;
+                    }
                 }
             }
         }
         &__items-list {
-            margin-top: 1.25rem;
-            padding: 0 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 22px;
-            position: relative;
-            &-error-msg {
-                position: absolute;
-                right: 1.5rem;
-                font-size: 13px;
-                color: v.$coral-red;
-                &:nth-child(3) {
-                    bottom: 0;
-                }
-            }
+            padding: 0 3.5rem;
             &-item {
                 display: grid;
-                gap: 25px;
+                grid-template-columns: 214px 1fr;
+                gap: 16px;
                 padding-bottom: 27px;
                 &-info {
                     display: grid;
-                    grid-template-columns: 1.25fr 2.25fr 1.5fr 1fr;
-                    align-items: center;
+                    grid-template-columns: 1.5fr 2.5fr 1.5fr 1fr;
                     gap: 16px;
-                    .total {
-                        align-self: start;
-                        gap: 25.6px;
-                        font-weight: bold;
-                    }
                 }
-                &-add-new {
-                    @include m.actionBtnColors(v.$night-blue);
-                    color: v.$blue-gray;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-            }
-            &-remove-btn {
-                background-color: transparent;
-                border: none;
-                align-self: center;
-                width: fit-content;
-                cursor: pointer;
-                justify-self: end;
-                transform: translateY(.8125rem);
             }
         }
         &__actions {
-            background-color: v.$night-blue;
-            padding: 1.3125rem 1.5rem;
-            margin-top: 3.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: .5rem;
-            button {
-                font-size: 14px;
-            }
-            &-discard {
-                @include m.actionBtnColors(v.$dark-blue);
-                padding-inline: 1rem;
-            }
-            &-draft {
-                @include m.actionBtnColors(v.$night-blue-hover);
-                padding-inline: 1rem;
-            }
-            &-save {
-                @include m.actionBtnColors(v.$violet-blue);
-                padding-inline: 1rem;
-                &:disabled {
-                    opacity: .4;
-                    cursor: not-allowed;
-                }
-            }
-            &-cancel {
-                @include m.actionBtnColors(v.$dark-blue);
-                margin-left: auto;
-                padding-inline: 1rem;
-            }
+            position: fixed;
+            bottom: 0;
+            width: 616px;
         }
     }
 }

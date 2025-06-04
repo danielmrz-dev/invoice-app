@@ -104,7 +104,7 @@
                                     {{ item.name }}
                                 </span>
                                 <span class="view-invoice__summary-item-price">
-                                    {{ item.quantity }} x <span>{{ item.price | currency : 'GBP' : '£ ' }}</span>
+                                    {{ item.quantity }} <span class="view-invoice__summary-item-price-x">x</span> <span>{{ item.price | currency : 'GBP' : '£ ' }}</span>
                                 </span>
                                 <span class="view-invoice__summary-item-total">
                                     {{ (item.quantity * item.price) | currency : 'GBP' : '£ ' }}

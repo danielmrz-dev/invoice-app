@@ -9,11 +9,30 @@
 .sidenav {
   width: 100%;
   background-color: v.$dark-blue;
+  overflow-y: auto;
 }
 
 @media screen and (min-width: 768px) {
   .sidenav {
     width: 616px;
-    padding: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: #666 transparent;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #666;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #888;
+    }
   }
 }

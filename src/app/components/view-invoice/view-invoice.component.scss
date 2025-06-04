@@ -245,7 +245,7 @@
                 gap: 2rem;
             }
             &-item {
-                grid-template-columns: 220px 150px 1fr;
+                grid-template-columns: 225px 150px 1fr;
                 color: v.$white;
                 &-name {
                     grid-area: 1 / 1;
@@ -255,6 +255,9 @@
                     display: flex;
                     justify-content: space-between;
                     color: v.$white;
+                    &-x {
+                        display: none;
+                    }
                 }
                 &-total {
                     grid-area: 1 / 3;
