@@ -294,6 +294,9 @@
         }
         &__items-list {
             padding: 0 3.5rem;
+            &-error-msg {
+                right: 4rem;
+            }
             &-item {
                 display: grid;
                 grid-template-columns: 214px 1fr;
