@@ -40,3 +40,35 @@
         }
     }
 }
+
+@media screen and (min-width: 768px) {
+    .invoice {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 1.25rem;
+        &::after {
+            content: url(../../../assets/images/icon-arrow-right.svg);
+            cursor: pointer;
+        }
+        &__name {
+            justify-self: flex-start;
+            width: 100px;
+        }
+        &__data {
+            width: 215px;
+            justify-self: flex-start;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0;
+            &-date {
+                width: 95px;
+            }
+            &-value {
+                width: calc(100% - 95px);
+                text-align: end;
+            }
+        }
+    }
+}

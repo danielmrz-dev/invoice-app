@@ -107,6 +107,9 @@
                 border-radius: 100%;
                 padding: 11px;
             }
+            &-btn-extra-text {
+                display: none;
+            }
         }
     }
     &__list {
@@ -141,6 +144,52 @@
                 line-height: 15px;
                 padding: 0 .625rem;
             }
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .invoices {
+        max-width: 672px;
+        margin: auto;
+        padding: 61px 24px;
+        &__info {
+            gap: 6px;
+            &-title {
+                font-size: 2.25rem;
+                font-weight: bold;
+                letter-spacing: -1.15px;
+            }
+        }
+        &__actions {
+            gap: 40px;
+            &-filter {
+                gap: 14px;
+            }
+            &-create {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                background-color: v.$lavender;
+                color: v.$white;
+                font-size: 15px;
+                font-weight: bold;
+                border: none;
+                border-radius: 24px;
+                padding: 6px 15px 6px 6px;
+                cursor: pointer;
+                img {
+                    background-color: v.$white;
+                    border-radius: 100%;
+                    padding: 11px;
+                }
+                &-btn-extra-text {
+                    display: block;
+                }
+            }
+        }
+        &__list {
+            margin: 3.4375rem auto;
         }
     }
 }
