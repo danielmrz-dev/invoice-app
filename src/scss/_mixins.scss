@@ -19,7 +19,10 @@
     line-height: 15px;
     letter-spacing: -0.25px;
     cursor: pointer;
-    transition: color .3s ease, background .3s ease;
+    transition: color .3s ease, background .3s ease, filter .3s ease;
+    &:hover:not(:disabled) {
+        filter: brightness(80%);
+    }
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed;

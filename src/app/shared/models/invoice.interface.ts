@@ -14,17 +14,17 @@ export interface Invoice {
 }
 
 export interface ISenderAddress {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
+    senderStreet: string;
+    senderCity: string;
+    senderPostCode: string;
+    senderCountry: string;
 }
 
 export interface IClientAddress {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
+    clientStreet: string;
+    clientCity: string;
+    clientPostCode: string;
+    clientCountry: string;
 }
 
 export interface Item {

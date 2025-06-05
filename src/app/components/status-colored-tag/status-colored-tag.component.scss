@@ -16,12 +16,14 @@
     align-items: center;
     justify-content: center;
     gap: 4px;
+    transition: background .3s ease, color .3s ease;
     &::before {
         content: '';
         height: 8px;
         width: 8px;
         background-color: v.$green;
         border-radius: 50%;
+        transition: background .3s ease, color .3s ease;
     }
 }
 
@@ -33,4 +35,7 @@
 }
 .draft {
     @include m.statusTagColor(v.$light-blue, v.$light-blue-opaque)
+}
+.draft-light {
+    @include m.statusTagColor(v.$dark-text-tag, v.$tag-bg)
 }

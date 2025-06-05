@@ -69,11 +69,17 @@
             padding-right: 30px;
             height: 100%;
             cursor: pointer;
+            &:focus {
+                border: 2px solid v.$lavender;
+            }
 
         }
         &[type="date"] {
             color: transparent;
             &::-webkit-calendar-picker-indicator {
+                cursor: pointer;
+                min-height: 100%;
+                z-index: 2;
                 filter: invert(1);
             }
         }
@@ -174,6 +180,7 @@
             display: grid;
             gap: 25px;
             padding-bottom: 27px;
+            transition: color .3s ease;
             &-info {
                 display: grid;
                 grid-template-columns: 1.25fr 2.25fr 1.5fr 1fr;
@@ -211,6 +218,7 @@
         align-items: center;
         justify-content: space-between;
         gap: .5rem;
+        transition: background .3s ease;
         button {
             font-size: 14px;
         }
@@ -316,6 +324,7 @@
             bottom: 0;
             width: 100%;
             z-index: 1;
+            padding: 1.5rem 3.5rem;
             &-draft {
                 margin-left: auto;
             }
@@ -349,6 +358,12 @@
     color: v.$blue-gray;
 }
 
+
+.dark-text-btn {
+    color: v.$sky-blue;
+    background-color: v.$light-blue;
+}
+
 .light-input {
     outline-color: v.$lavender;
     background-color: v.$white;
@@ -356,5 +371,11 @@
     &-error {
         border-color: transparent;
         outline-color: v.$coral-red;
+    }
+    &[type="date"] {
+        color: transparent;
+        &::-webkit-calendar-picker-indicator {
+            filter: invert(0);
+        }
     }
 }

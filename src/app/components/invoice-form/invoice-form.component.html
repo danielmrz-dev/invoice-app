@@ -217,9 +217,9 @@
                             'form__input-error': createdAt.touched && createdAt.hasError('required')
                         }"
                         type="date" 
-                        id="invoiceDate" 
+                        id="invoiceDate"
                         formControlName="createdAt">
-                    <span class="form__bill-to-label-span">{{ createdAt.value | date : 'dd MMM yyyy' }}</span>
+                    <span class="form__bill-to-label-span" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">{{ createdAt.value | date : 'dd MMM yyyy' }}</span>
                     <span
                         class="form__label-error-msg"
                         *ngIf="createdAt.touched && createdAt.hasError('required')"
@@ -293,6 +293,8 @@
                         [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && ((item.get('name')?.touched && item.get('name')?.hasError('required')) || (!item.get('name')?.hasError('required') && (item.get('name')?.hasError('minlength') || item.get('name')?.hasError('invalidValue')))),
                             'form__input-error': (item.get('name')?.touched && item.get('name')?.hasError('required')) || (!item.get('name')?.hasError('required') && (item.get('name')?.hasError('minlength') || item.get('name')?.hasError('invalidValue')))
                         }"
                         type="text" 
@@ -314,6 +316,8 @@
                             maxlength="2"
                             class="form__input"
                             [ngClass]="{
+                                'light-input': isDarkThemeActive$ | async,
+                                'light-input-error': (isDarkThemeActive$ | async) && ((item.get('quantity')?.touched && item.get('quantity')?.hasError('required')) || (!item.get('quantity')?.hasError('required') && item.get('quantity')?.hasError('minQtyOrPrice'))),
                                 'form__input-error': (item.get('quantity')?.touched && item.get('quantity')?.hasError('required')) || (!item.get('quantity')?.hasError('required') && item.get('quantity')?.hasError('minQtyOrPrice'))
                             }"
                             type="text" 
@@ -333,6 +337,8 @@
                             maxlength="5"
                             class="form__input"
                             [ngClass]="{
+                                'light-input': isDarkThemeActive$ | async,
+                                'light-input-error': (isDarkThemeActive$ | async) && ((item.get('price')?.touched && item.get('price')?.hasError('required')) || (!item.get('price')?.hasError('required') && item.get('price')?.hasError('minQtyOrPrice'))),
                                 'form__input-error': (item.get('price')?.touched && item.get('price')?.hasError('required')) || (!item.get('price')?.hasError('required') && item.get('price')?.hasError('minQtyOrPrice'))
                             }"
                             type="text" 
@@ -362,16 +368,20 @@
                 </div>
             </li>
             <button class="form__items-list-item-add-new" 
-                (click)="addNewItem()">
+                [ngClass]="{ 'dark-text-btn': isDarkThemeActive$ | async }"
+                (click)="addNewItem()
+                ">
                 + Add New Item
             </button>
         </ul>
 
-        <div class="form__actions">
+        <div class="form__actions" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
 
             <ng-container *ngIf="formType === 'create'; else edit">
                 <button class="form__actions-discard"
-                    (click)="discardChangesAndClose()">
+                    (click)="discardChangesAndClose()"
+                    [ngClass]="{ 'dark-text-btn': isDarkThemeActive$ | async }"
+                    >
                     Discard
                 </button>
                 <button [disabled]="form.invalid" class="form__actions-draft" (click)="createNewInvoice('draft')">Save as Draft</button>

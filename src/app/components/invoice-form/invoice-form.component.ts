@@ -70,16 +70,16 @@ export class InvoiceFormComponent extends InvoiceFormController {
           clientEmail: invoice?.clientEmail,
           status: invoice?.status,
           senderAddress: {
-            street: invoice?.senderAddress.street,
-            city: invoice?.senderAddress.city,
-            postCode: invoice?.senderAddress.postCode,
-            country: invoice?.senderAddress.country,
+            senderStreet: invoice?.senderAddress.senderStreet,
+            senderCity: invoice?.senderAddress.senderCity,
+            senderPostCode: invoice?.senderAddress.senderPostCode,
+            senderCountry: invoice?.senderAddress.senderCountry,
           },
           clientAddress: {
-            street: invoice?.clientAddress.street,
-            city: invoice?.clientAddress.city,
-            postCode: invoice?.clientAddress.postCode,
-            country: invoice?.clientAddress.country,
+            clientStreet: invoice?.clientAddress.clientStreet,
+            clientCity: invoice?.clientAddress.clientCity,
+            clientPostCode: invoice?.clientAddress.clientPostCode,
+            clientCountry: invoice?.clientAddress.clientCountry,
           },
           total: invoice?.total
         })

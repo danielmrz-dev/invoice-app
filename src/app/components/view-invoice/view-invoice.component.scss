@@ -2,6 +2,7 @@
 @use "../../../scss/mixins" as m;
 
 .view-invoice {
+    min-height: 100vh;
     margin: 2.0625rem 0 0;
     display: flex;
     flex-direction: column;
@@ -150,14 +151,17 @@
             &-name {
                 grid-area: 1 / 1;
                 white-space: nowrap;
+                transition: color .3s ease;
             }
             &-price {
                 grid-area: 2 / 1;
                 color: v.$blue-gray;
+                transition: color .3s ease;
             }
             &-total {
                 grid-area: 1 / 2 / 3 / 3;
                 justify-self: end;
+                transition: color .3s ease;
             }
         }
         &-total {

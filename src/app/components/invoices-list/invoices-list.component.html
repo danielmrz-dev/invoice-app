@@ -11,17 +11,17 @@
                 Filter
             </button>
             <mat-menu #menu="matMenu">
-                <label for="paid" class="invoices__actions-filter-label">
+                <label for="paid" class="invoices__actions-filter-label" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
                     <input type="checkbox" id="paid" (change)="filterByStatus($event)">
                     Paid
                     <span></span>
                 </label>
-                <label for="pending" class="invoices__actions-filter-label">
+                <label for="pending" class="invoices__actions-filter-label" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
                     <input type="checkbox" id="pending" (change)="filterByStatus($event)">
                     Pending
                     <span></span>
                 </label>
-                <label for="draft" class="invoices__actions-filter-label">
+                <label for="draft" class="invoices__actions-filter-label" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
                     <input type="checkbox" id="draft" (change)="filterByStatus($event)">
                     Draft
                     <span></span>

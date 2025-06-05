@@ -1,4 +1,4 @@
-<div statusColorDirective [currentStatus]="status" class="status-tag">
+<div statusColorDirective [currentStatus]="status" class="status-tag" [ngClass]="{ 'draft-light': (isDarkThemeActive$ | async) && status === 'draft' }">
     <span class="status-tag__circle"></span>
     {{ status | titlecase }}
 </div>

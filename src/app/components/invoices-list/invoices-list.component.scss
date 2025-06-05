@@ -104,6 +104,10 @@
             border-radius: 24px;
             padding: 6px 15px 6px 6px;
             cursor: pointer;
+            transition: filter .3s ease;
+            &:hover {
+                filter: brightness(70%);
+            }
             img {
                 background-color: v.$white;
                 border-radius: 100%;
@@ -209,5 +213,46 @@
     .invoices {
         max-width: 730px;
         padding: 61px 0;
+    }
+}
+
+::ng-deep.mat-mdc-menu-panel {
+    margin: 1rem 0;
+    padding: 0 !important;
+    background-color: v.$dark-blue !important;
+}
+
+::ng-deep.mat-mdc-focus-indicator {
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+::ng-deep.mat-menu-item {
+    padding: 0 !important;
+}
+
+::ng-deep.mdc-label {
+    color: v.$white;
+    margin-right: auto;
+}
+
+::ng-deep.mat-mdc-menu-content {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.light-bg {
+    background-color: v.$white;
+    color: v.$dark-text;
+    span {
+        &::after {
+            color: v.$white;
+        }
+    }
+    &:hover {
+        background-color: v.$light-blue;
     }
 }

@@ -7,7 +7,7 @@
             'light-theme': isDarkThemeActive$ | async
         }"
         >
-        <mat-sidenav class="sidenav" #sidenav mode="over" position="start">
+        <mat-sidenav class="sidenav" #sidenav mode="over" position="start" [ngClass]="{ 'light-theme': isDarkThemeActive$ | async }">
             <router-outlet name="sidenav"></router-outlet>
         </mat-sidenav>
         <router-outlet></router-outlet>

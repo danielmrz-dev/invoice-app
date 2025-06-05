@@ -56,14 +56,14 @@ export class InvoicesService {
 
   private updateInvoice(current: Invoice, updated: Invoice): void {
     current.id = current.id;
-    current.clientAddress.street = updated.clientAddress.street || current.clientAddress.street;
-    current.clientAddress.city = updated.clientAddress.city || current.clientAddress.city;
-    current.clientAddress.country = updated.clientAddress.country || current.clientAddress.country;
-    current.clientAddress.postCode = updated.clientAddress.postCode || current.clientAddress.postCode;
-    current.senderAddress.street = updated.senderAddress.street || updated.senderAddress.street
-    current.senderAddress.city = updated.senderAddress.city || updated.senderAddress.city
-    current.senderAddress.postCode = updated.senderAddress.postCode || updated.senderAddress.postCode
-    current.senderAddress.country = updated.senderAddress.country || updated.senderAddress.country
+    current.clientAddress.clientStreet = updated.clientAddress.clientStreet || current.clientAddress.clientStreet;
+    current.clientAddress.clientCity = updated.clientAddress.clientCity || current.clientAddress.clientCity;
+    current.clientAddress.clientCountry = updated.clientAddress.clientCountry || current.clientAddress.clientCountry;
+    current.clientAddress.clientPostCode = updated.clientAddress.clientPostCode || current.clientAddress.clientPostCode;
+    current.senderAddress.senderStreet = updated.senderAddress.senderStreet || updated.senderAddress.senderStreet
+    current.senderAddress.senderCity = updated.senderAddress.senderCity || updated.senderAddress.senderCity
+    current.senderAddress.senderPostCode = updated.senderAddress.senderPostCode || updated.senderAddress.senderPostCode
+    current.senderAddress.senderCountry = updated.senderAddress.senderCountry || updated.senderAddress.senderCountry
     current.clientEmail = updated.clientEmail || current.clientEmail;
     current.clientName = updated.clientName || current.clientName;
     current.createdAt = updated.createdAt || current.createdAt;
