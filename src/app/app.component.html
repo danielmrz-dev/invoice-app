@@ -1,7 +1,15 @@
-<app-header></app-header>
-<mat-sidenav-container class="example-container">
-    <mat-sidenav class="sidenav" #sidenav mode="over" position="start">
-        <router-outlet name="sidenav"></router-outlet>
-    </mat-sidenav>
-    <router-outlet></router-outlet>
-</mat-sidenav-container>
+<div class="container">
+    <app-header></app-header>
+    <mat-sidenav-container 
+        class="example-container"
+        (backdropClick)="goBack()"
+        [ngClass]="{
+            'light-theme': isDarkThemeActive$ | async
+        }"
+        >
+        <mat-sidenav class="sidenav" #sidenav mode="over" position="start">
+            <router-outlet name="sidenav"></router-outlet>
+        </mat-sidenav>
+        <router-outlet></router-outlet>
+    </mat-sidenav-container>
+</div>

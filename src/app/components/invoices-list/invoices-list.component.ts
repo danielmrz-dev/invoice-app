@@ -9,6 +9,7 @@ import { SidenavService } from '../../shared/services/sidenav.service';
 import { Router } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ThemeService } from '../../shared/services/theme.service';
 
 
 
@@ -26,11 +27,13 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
   invoicesAmount: number = 0;
   invoicesAmountSub!: Subscription;
   invoicesFilter: InvoiceStatus[] = [];
+  isDarkThemeActive$: Observable<boolean> = of();
 
   constructor(
     private readonly invoicesService: InvoicesService,
     private readonly sidenavService: SidenavService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +44,7 @@ export class InvoicesListComponent implements OnInit, OnDestroy {
     this.invoicesAmountSub = this.invoicesService.invoices$.subscribe((invoicesList) => {
       this.invoicesAmount = invoicesList.length;
     })
+    this.isDarkThemeActive$ = this.themeService.isDarkThemeActive$;
   }
 
   ngOnDestroy(): void {

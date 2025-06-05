@@ -19,6 +19,7 @@
     line-height: 15px;
     letter-spacing: -0.25px;
     cursor: pointer;
+    transition: color .3s ease, background .3s ease;
     &:disabled {
         opacity: 0.5;
         cursor: not-allowed;

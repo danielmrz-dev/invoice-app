@@ -15,16 +15,16 @@ export class InvoiceFormController {
             clientEmail: fb.control(''),
             status: fb.control('pending', [Validators.required]),
             senderAddress: fb.group({
-                street: fb.control('', [Validators.required, Validators.minLength(5)]),
-                city: fb.control('', [Validators.required]),
-                postCode: fb.control('', [Validators.required, Validators.minLength(5)]),
-                country: fb.control('', [Validators.required]),
+                senderStreet: fb.control('', [Validators.required, Validators.minLength(5)]),
+                senderCity: fb.control('', [Validators.required]),
+                senderPostCode: fb.control('', [Validators.required, Validators.minLength(5)]),
+                senderCountry: fb.control('', [Validators.required]),
             }),
             clientAddress: fb.group({
-                street:fb.control(''),
-                city:fb.control(''),
-                postCode:fb.control(''),
-                country:fb.control(''),
+                clientStreet:fb.control(''),
+                clientCity:fb.control(''),
+                clientPostCode:fb.control('', [Validators.minLength(5)]),
+                clientCountry:fb.control(''),
             }),
             items: fb.array([], [Validators.required]),
             total: fb.control('')
@@ -78,35 +78,35 @@ export class InvoiceFormController {
     }
 
     get senderStreet(): FormControl {
-        return this.form.get('senderAddress.street') as FormControl;
+        return this.form.get('senderAddress.senderStreet') as FormControl;
     }
 
     get senderCity(): FormControl {
-        return this.form.get('senderAddress.city') as FormControl;
+        return this.form.get('senderAddress.senderCity') as FormControl;
     }
 
     get senderPostCode(): FormControl {
-        return this.form.get('senderAddress.postCode') as FormControl;
+        return this.form.get('senderAddress.senderPostCode') as FormControl;
     }
 
     get senderCountry(): FormControl {
-        return this.form.get('senderAddress.country') as FormControl;
+        return this.form.get('senderAddress.senderCountry') as FormControl;
     }
 
     get clientStreet(): FormControl {
-        return this.form.get('clientAddress.street') as FormControl;
+        return this.form.get('clientAddress.clientStreet') as FormControl;
     }
 
     get clientCity(): FormControl {
-        return this.form.get('clientAddress.city') as FormControl;
+        return this.form.get('clientAddress.clientCity') as FormControl;
     }
 
     get clientPostCode(): FormControl {
-        return this.form.get('clientAddress.postCode') as FormControl;
+        return this.form.get('clientAddress.clientPostCode') as FormControl;
     }
 
     get clientCountry(): FormControl {
-        return this.form.get('clientAddress.country') as FormControl;
+        return this.form.get('clientAddress.clientCountry') as FormControl;
     }
 
     get status(): FormControl {

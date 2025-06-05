@@ -1,23 +1,5 @@
 @use "./variables" as v;
 
-// DIALOG 
-
-.mat-mdc-dialog-surface {
-    background-color: v.$dark-blue !important;
-    border-radius: 8px !important;
-    padding: 2rem;
-}
-
-.mdc-dialog__content {
-    border-radius: 0;
-    padding: 0 !important;
-}
-
-.mdc-dialog__actions {
-    padding: 0 !important;
-    min-height: 0 !important;
-}
-
 // MENU
 
 .mat-mdc-menu-panel {

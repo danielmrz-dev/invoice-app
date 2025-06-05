@@ -9,9 +9,10 @@
     &__logo {
         background-color: v.$violet-blue;
         padding: 1.4375rem;
-        max-height: 72px;
+        max-height: 77px;
         border-radius: 0 20px 20px 0;
         position: relative;
+        width: 77px;
         overflow: hidden;
         img {
             position: relative;
@@ -47,6 +48,22 @@
             width: 40px;
             height: 40px;
             border-radius: 100%;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .header {
+        height: 100vh;
+        flex-direction: column;
+        max-width: 77px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 2;
+        border-radius: 0 20px 20px 0;
+        &__nav {
+            flex-direction: column;
         }
     }
 }

@@ -1,13 +1,13 @@
 <section class="invoices">
     <div class="invoices__header">
         <div class="invoices__info">
-            <strong class="invoices__info-title">Invoices</strong>
-            <span class="invoices__info-amount">
+            <strong class="invoices__info-title" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">Invoices</strong>
+            <span class="invoices__info-amount" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                 {{ invoicesAmount | invoicesAmount }}
             </span>
         </div>
         <div class="invoices__actions">
-            <button class="invoices__actions-filter" [matMenuTriggerFor]="menu">
+            <button class="invoices__actions-filter" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }" [matMenuTriggerFor]="menu">
                 Filter
             </button>
             <mat-menu #menu="matMenu">
@@ -43,9 +43,10 @@
                 [date]="invoice.paymentDue"
                 [value]="invoice.total"
                 [status]="invoice.status"
+                [isDarkThemeActive$]="isDarkThemeActive$"
             ></app-invoice-card>
         } @empty {
-            <div class="invoices__list-empty">
+            <div class="invoices__list-empty" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
                 <img src="illustration-empty.svg" alt="">
                 <div class="invoices__list-empty-text">
                     <h3 class="invoices__list-empty-title">

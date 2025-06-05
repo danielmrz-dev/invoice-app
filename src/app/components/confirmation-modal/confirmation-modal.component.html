@@ -1,7 +1,7 @@
 <ng-container *ngIf="data.confirmDelete">
-    <mat-dialog-content class="dialog" >
+    <mat-dialog-content class="dialog" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
         <div class="dialog__text">
-            <h2 mat-dialog-title class="dialog__text-title">Confirm Deletion</h2>
+            <h2 mat-dialog-title class="dialog__text-title" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">Confirm Deletion</h2>
             <p class="dialog__text-message">
                 Are you sure you want to delete invoice #{{ data.invoiceId }}? This action cannot be undone.
             </p>

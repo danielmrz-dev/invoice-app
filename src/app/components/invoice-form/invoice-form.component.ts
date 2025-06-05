@@ -4,7 +4,7 @@ import { InvoiceFormController } from './invoice-form-controller';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { concatMap } from 'rxjs';
+import { concatMap, Observable, of } from 'rxjs';
 import { FormType } from '../../shared/models/form-type.type';
 import { InvoicesService } from '../../shared/services/invoices.service';
 import { NgxMaskDirective } from 'ngx-mask';
@@ -16,6 +16,7 @@ import { MinItemsValidatorDirective } from '../../shared/directives/min-items-va
 import { OnlyLettersDirective } from '../../shared/directives/only-letters.directive';
 import { MinQtyOrPriceDirective } from '../../shared/directives/min-qty-or-price.directive';
 import { MinCharactersDirective } from '../../shared/directives/min-characters.directive';
+import { ThemeService } from '../../shared/services/theme.service';
 
 @Component({
   selector: 'app-invoice-form',
@@ -33,18 +34,21 @@ export class InvoiceFormComponent extends InvoiceFormController {
   customPatterns = {
     'A': { pattern: new RegExp('[a-zA-ZÀ-ú ]') }
   }
+  isDarkThemeActive$: Observable<boolean> = of();
 
   constructor(
     private readonly sidenavService: SidenavService,
     private readonly invoicesService: InvoicesService,
     private readonly location: Location,
     private readonly activatedRoute: ActivatedRoute,
+    private readonly themeService: ThemeService,
     readonly formBuilder: FormBuilder,
   ) {
     super(formBuilder);
   }
 
   ngOnInit(): void {
+    this.isDarkThemeActive$ = this.themeService.isDarkThemeActive$;
     this.form.markAsUntouched();
     this.formType = this.activatedRoute.snapshot.data['form'];
     this.activatedRoute.params.pipe(

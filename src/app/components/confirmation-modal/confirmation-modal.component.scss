@@ -6,6 +6,8 @@
     display: flex;
     flex-direction: column;
     gap: 1.375rem;
+    background-color: v.$dark-blue;
+    padding: 2rem !important;
     &__text {
         display: flex;
         flex-direction: column;
@@ -31,4 +33,27 @@
     &__confirm {
         @include m.actionBtnColors(v.$coral-red);
     }
+}
+
+.light-bg {
+    background-color: v.$white;
+}
+
+.dark-text {
+    color: v.$dark-text;
+}
+
+::ng-deep.mat-mdc-dialog-surface {
+    background-color: v.$dark-blue !important;
+    border-radius: 10px !important;
+}
+
+::ng-deep.mdc-dialog__content {
+    border-radius: 0;
+    padding: 0 !important;
+}
+
+::ng-deep.mdc-dialog__actions {
+    padding: 0 !important;
+    min-height: 0 !important;
 }

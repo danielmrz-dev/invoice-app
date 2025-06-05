@@ -3,8 +3,9 @@
         <img src="logo.svg" alt="Logo">
     </div>
     <div class="header__nav">
-        <button class="header__nav-theme-btn">
-            <img src="icon-sun.svg" alt="">
+        <button class="header__nav-theme-btn" (click)="toggleTheme()">
+            <img src="icon-sun.svg" alt="" *ngIf="!(isDarkThemeActive$ | async)">
+            <img src="icon-moon.svg" alt="" *ngIf="(isDarkThemeActive$ | async)">
         </button>
         <div class="header__nav-container">
             <img src="daniel.jpeg" alt="" class="header__nav-image">

@@ -1,5 +1,5 @@
 <section class="view-invoice">
-    <button routerLink="/invoices" class="view-invoice__go-back-btn">
+    <button routerLink="/invoices" class="view-invoice__go-back-btn" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
         Go back
     </button>
 
@@ -7,39 +7,42 @@
 
         <div class="view-invoice__info-container" *ngIf="invoice">
 
-            <div class="view-invoice__status">
-                <p>Status</p>
+            <div class="view-invoice__status" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
+                <p class="view-invoice__status-text" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">Status</p>
                 <app-status-colored-tag [status]="invoice.status" />
-                <div class="view-invoice__actions header">
-                    <button class="view-invoice__actions-btn-edit" (click)="openEditForm()">
+                <div class="view-invoice__actions header" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
+                    <button class="view-invoice__actions-btn-edit" (click)="openEditForm()"
+                        [ngClass]="{ 'dark-text-btn': isDarkThemeActive$ | async }">
                         Edit
                     </button>
-                    <button class="view-invoice__actions-btn-delete" (click)="deleteInvoice()">
+                    <button class="view-invoice__actions-btn-delete" (click)="deleteInvoice()"
+                        [ngClass]="{ 'light-text-btn': isDarkThemeActive$ | async }">
                         Delete
                     </button>
                     <button class="view-invoice__actions-btn-mark-as-paid" (click)="markInvoiceAsPaid()"
-                        [disabled]="invoice.status === 'paid'">
+                        [disabled]="invoice.status === 'paid'"
+                        [ngClass]="{ 'light-text-btn': isDarkThemeActive$ | async }">
                         Mark as paid
                     </button>
                 </div>
             </div>
 
-            <div class="view-invoice__info">
+            <div class="view-invoice__info" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
 
                 <div class="view-invoice__info-data">
 
                     <div class="view-invoice__client-info-data-id-and-description">
-                        <span class="view-invoice__info-data-id">
-                            #{{ invoice.id }}
+                        <span class="view-invoice__info-data-id" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
+                            <span class="view-invoice__info-data-id-hash">#</span>{{ invoice.id }}
                         </span>
-                        <span class="view-invoice__info-data-description">
+                        <span class="view-invoice__info-data-description" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                             {{ invoice.description }}
                         </span>
                     </div>
 
                     <ul class="view-invoice__info-data-address">
                         <li class="view-invoice__info-data-address-item"
-                            *ngFor="let key of invoice.senderAddress | keyvalue">
+                            *ngFor="let key of invoice.senderAddress | keyvalue" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                             {{ key.value }}
                         </li>
                     </ul>
@@ -47,44 +50,44 @@
                     <div class="view-invoice__client">
 
                         <div class="view-invoice__client-info invoice-date">
-                            <span class="view-invoice__client-info-title">
+                            <span class="view-invoice__client-info-title" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                                 Invoice Date
                             </span>
-                            <span class="view-invoice__client-info-data">
+                            <span class="view-invoice__client-info-data" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
                                 {{ invoice.createdAt | date : 'dd MMM y' }}
                             </span>
                         </div>
 
                         <div class="view-invoice__client-info bill-to">
-                            <span class="view-invoice__client-info-title">
+                            <span class="view-invoice__client-info-title" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                                 Bill to
                             </span>
-                            <span class="view-invoice__client-info-data">
+                            <span class="view-invoice__client-info-data" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
                                 {{ invoice.clientName }}
                             </span>
 
                             <ul>
                                 <span class="view-invoice__client-info-data-address"
-                                    *ngFor="let key of invoice.clientAddress | keyvalue">
+                                    *ngFor="let key of invoice.clientAddress | keyvalue" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                                     {{ key.value || 'Not available' }}
                                 </span>
                             </ul>
                         </div>
 
                         <div class="view-invoice__client-info payment-due">
-                            <span class="view-invoice__client-info-title">
+                            <span class="view-invoice__client-info-title" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                                 Payment Due
                             </span>
-                            <span class="view-invoice__client-info-data">
+                            <span class="view-invoice__client-info-data" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
                                 {{ invoice.paymentDue | date : 'dd MMM y' }}
                             </span>
                         </div>
 
                         <div class="view-invoice__client-info sent-to">
-                            <span class="view-invoice__client-info-title">
+                            <span class="view-invoice__client-info-title" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                                 Sent to
                             </span>
-                            <span class="view-invoice__client-info-data">
+                            <span class="view-invoice__client-info-data" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
                                 {{ invoice.clientEmail || 'Not available' }}
                             </span>
                         </div>
@@ -92,21 +95,31 @@
                     </div>
 
                     <div class="view-invoice__summary">
-                        <div class="view-invoice__summary-items">
+                        <div class="view-invoice__summary-items" [ngClass]="{ 'semi-light-bg': isDarkThemeActive$ | async }">
                             <div class="view-invoice__summary-table-head">
-                                <span>Item name</span>
-                                <span>QTY.</span>
-                                <span>Price</span>
-                                <span>Total</span>
+                                <span [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">Item name</span>
+                                <span [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">QTY.</span>
+                                <span [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">Price</span>
+                                <span [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">Total</span>
                             </div>
                             <div class="view-invoice__summary-item" *ngFor="let item of invoice.items">
-                                <span class="view-invoice__summary-item-name">
+                                <span class="view-invoice__summary-item-name" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
                                     {{ item.name }}
                                 </span>
-                                <span class="view-invoice__summary-item-price">
-                                    {{ item.quantity }} <span class="view-invoice__summary-item-price-x">x</span> <span>{{ item.price | currency : 'GBP' : '£ ' }}</span>
+                                <span 
+                                    class="view-invoice__summary-item-price"
+                                    [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }" >
+                                        {{ item.quantity }} 
+                                        <span 
+                                            class="view-invoice__summary-item-price-x"
+                                            >
+                                                x
+                                        </span> 
+                                        <span [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }" >
+                                            {{ item.price | currency : 'GBP' : '£ ' }}
+                                        </span>
                                 </span>
-                                <span class="view-invoice__summary-item-total">
+                                <span class="view-invoice__summary-item-total" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
                                     {{ (item.quantity * item.price) | currency : 'GBP' : '£ ' }}
                                 </span>
                             </div>
@@ -141,7 +154,7 @@
     </ng-container>
 
     <ng-template #noInvoiceFound>
-        <div class="view-invoice__not-found">
+        <div class="view-invoice__not-found" >
             No invoice with ID <strong>#{{ idNotFound }}</strong> was found.
         </div>
     </ng-template>

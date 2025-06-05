@@ -9,7 +9,7 @@
     border-radius: 8px;
     gap: 1.5rem;
     cursor: pointer;
-    transition: background .4s ease;
+    transition: background .3s ease;
     &:hover {
         background-color: v.$night-blue-hover;
     }
@@ -19,6 +19,7 @@
         text-transform: uppercase;
         line-height: 15px;
         letter-spacing: -0.2496px;
+        transition: color .3s ease;
         span {
             color: v.$blue-gray;
         }
@@ -28,6 +29,7 @@
         line-height: 15px;
         letter-spacing: -0.1px;
         justify-self: end;
+        transition: color .3s ease;
     }
     &__data {
         display: grid;
@@ -37,8 +39,27 @@
             color: v.$light-blue;
             line-height: 15px;
             letter-spacing: -0.1px;
+            transition: color .3s ease;
+        }
+        &-value {
+            transition: color .3s ease;
         }
     }
+}
+
+.light-bg {
+    background-color: v.$white;
+    &:hover {
+        background-color: v.$light-blue-opaque;
+    }
+}
+
+.dark-text {
+    color: v.$dark-text;
+}
+
+.semi-dark-text {
+    color: v.$blue-gray;
 }
 
 @media screen and (min-width: 768px) {

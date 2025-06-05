@@ -1,15 +1,15 @@
-<li class="invoice" [routerLink]="['/view-invoice', id]">
-    <strong class="invoice__id">
+<li class="invoice" [routerLink]="['/view-invoice', id]" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
+    <strong class="invoice__id" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
         <span>#</span>{{ id }}
     </strong>
-    <span class="invoice__name">
+    <span class="invoice__name" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
         {{ clientName }}
     </span>
     <div class="invoice__data">
-        <span class="invoice__data-date">
+        <span class="invoice__data-date"  [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
             Due {{ date | date : "d MMM y" }}
         </span>
-        <strong class="invoice__data-value">
+        <strong class="invoice__data-value"  [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
             {{ value | currency : "GBP" : "£ " }}
         </strong>
     </div>

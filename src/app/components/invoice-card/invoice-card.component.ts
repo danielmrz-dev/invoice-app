@@ -3,6 +3,7 @@ import { InvoiceStatus } from '../../shared/models/invoice.interface';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { StatusColoredTagComponent } from "../status-colored-tag/status-colored-tag.component";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-invoice-card',
@@ -17,4 +18,5 @@ export class InvoiceCardComponent {
   @Input({ required: true }) date!: string;
   @Input({ required: true }) value!: number;
   @Input({ required: true }) status!: InvoiceStatus;
+  @Input({ required: true }) isDarkThemeActive$!: Observable<boolean>;
 }

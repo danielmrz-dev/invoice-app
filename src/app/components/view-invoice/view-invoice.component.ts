@@ -3,11 +3,12 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { StatusColoredTagComponent } from "../status-colored-tag/status-colored-tag.component";
 import { InvoicesService } from '../../shared/services/invoices.service';
 import { Invoice } from '../../shared/models/invoice.interface';
-import { concatMap } from 'rxjs';
+import { concatMap, Observable, of } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { SidenavService } from '../../shared/services/sidenav.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+import { ThemeService } from '../../shared/services/theme.service';
 
 @Component({
   selector: 'app-view-invoice',
@@ -20,6 +21,7 @@ export class ViewInvoiceComponent implements OnInit {
 
   invoice!: Invoice | undefined;
   idNotFound: string | null = '';
+  isDarkThemeActive$: Observable<boolean> = of();
 
   constructor(
     private readonly invoicesService: InvoicesService,
@@ -27,6 +29,7 @@ export class ViewInvoiceComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly sidenavService: SidenavService,
     private readonly dialog: MatDialog,
+    private readonly themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
@@ -44,6 +47,7 @@ export class ViewInvoiceComponent implements OnInit {
         this.invoice = invoiceFound;
       }
     })
+    this.isDarkThemeActive$ = this.themeService.isDarkThemeActive$;
   }
 
   openEditForm() {

@@ -3,6 +3,7 @@
 .invoices {
     padding: 32px 24px;
     color: v.$snow-white;
+    min-height: 100vh;
     &__header {
         display: flex;
         align-items: center;
@@ -16,6 +17,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             letter-spacing: -0.75px;
+            transition: color .3s ease;
         }
         &-amount {
             color: v.$light-blue;
@@ -124,6 +126,7 @@
             justify-content: center;
             gap: 2.625rem;
             margin-top: 4.375rem;
+            transition: color .3s ease;
             img {
                 max-width: 193px;
             }
@@ -146,6 +149,14 @@
             }
         }
     }
+}
+
+.dark-text {
+    color: v.$dark-text;
+}
+
+.semi-dark-text {
+    color: v.$blue-gray;
 }
 
 @media screen and (min-width: 768px) {
@@ -191,5 +202,12 @@
         &__list {
             margin: 3.4375rem auto;
         }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .invoices {
+        max-width: 730px;
+        padding: 61px 0;
     }
 }

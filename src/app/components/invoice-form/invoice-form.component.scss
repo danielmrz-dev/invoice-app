@@ -50,7 +50,8 @@
     &__input {
         border-radius: .25rem;
         background-color: v.$night-blue;
-        border: none;
+        border: 1px solid transparent;
+        outline: 1px solid transparent;
         padding: 18px 20px 15px;
         color: v.$white;
         font-size: .9375rem;
@@ -59,6 +60,7 @@
         width: 100%;
         &-error {
             outline: 1px solid v.$coral-red;
+            border-color: transparent;
         }
         &.select {
             appearance: none;
@@ -241,7 +243,7 @@
         display: none;
     }
     .form {
-        margin: 0 auto 8rem;
+        margin: 0 auto;
         position: relative;
         &__title {
             padding: 3.6875rem 3.5rem 1.5rem;
@@ -310,9 +312,49 @@
             }
         }
         &__actions {
-            position: fixed;
+            position: sticky;
             bottom: 0;
-            width: 616px;
+            width: 100%;
+            z-index: 1;
+            &-draft {
+                margin-left: auto;
+            }
         }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .form {
+        position: relative;
+        margin-left: 77px;
+        &__items-list {
+            &-item {
+                &-info {
+                    grid-template-columns: 1.5fr 2.5fr 2fr .5fr;
+                }
+            }
+        }
+    }
+}
+
+.light-bg {
+    background-color: v.$white;
+}
+
+.dark-text {
+    color: v.$dark-text;
+}
+
+.semi-dark-text {
+    color: v.$blue-gray;
+}
+
+.light-input {
+    outline-color: v.$lavender;
+    background-color: v.$white;
+    color: v.$dark-text;
+    &-error {
+        border-color: transparent;
+        outline-color: v.$coral-red;
     }
 }

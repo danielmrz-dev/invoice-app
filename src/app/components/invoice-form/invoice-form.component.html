@@ -1,29 +1,31 @@
-<aside class="wrapper">
+<aside class="wrapper" [ngClass]="{ 'light-bg': isDarkThemeActive$ | async }">
     <button class="go-back-btn" (click)="closeSidenav()">
         Go back
     </button>
 
     <form class="form" [formGroup]="form">
-        <h3 class="form__title" *ngIf="formType === 'create'">
+        <h3 class="form__title" *ngIf="formType === 'create'" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
             New invoice
         </h3>
-        <h3 class="form__title" *ngIf="formType === 'edit'">
+        <h3 class="form__title" *ngIf="formType === 'edit'" [ngClass]="{ 'dark-text': isDarkThemeActive$ | async }">
             Edit <span>#</span>{{ invoiceId }}
         </h3>
         <div class="form__bill-from" formGroupName="senderAddress">
             <span class="form__section-title">Bill from</span>
             <div class="form__bill-from-inputs">
-                <label class="form__label form__bill-from-label" for="street">
+                <label class="form__label form__bill-from-label" for="senderStreet" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     Street Address
                     <input
                         appMinCharacters
                         class="form__input"
                         [ngClass]="{
-                            'form__input-error': (senderStreet.touched && senderStreet.hasError('required')) || (!senderStreet.hasError('required') && senderStreet.hasError('invalidValue'))
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (senderStreet.touched && senderStreet.hasError('required')) || (!senderStreet.hasError('required') && senderStreet.hasError('invalidValue')),
+                            'form__input-error': (senderStreet.touched && senderStreet.hasError('required')) || (!senderStreet.hasError('required') && senderStreet.hasError('invalidValue')),
                         }"
                         type="text" 
-                        id="street"
-                        formControlName="street">
+                        id="senderStreet"
+                        formControlName="senderStreet">
                     <span 
                         class="form__label-error-msg"
                         *ngIf="(senderStreet.touched && senderStreet.hasError('required')) || (!senderStreet.hasError('required') && senderStreet.hasError('invalidValue'))">
@@ -31,7 +33,7 @@
                     </span>
                 </label>
 
-                <label class="form__label form__bill-from-label" for="city">
+                <label class="form__label form__bill-from-label" for="senderCity">
                     City
                     <input
                         appMinCharacters
@@ -39,18 +41,20 @@
                         [patterns]="customPatterns"
                         class="form__input" 
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (senderCity.touched && senderCity.hasError('required')) || (!senderCity.hasError('required') && (senderCity.hasError('minlength') || senderCity.hasError('invalidValue'))),
                             'form__input-error': (senderCity.touched && senderCity.hasError('required')) || (!senderCity.hasError('required') && (senderCity.hasError('minlength') || senderCity.hasError('invalidValue')))
                         }"
                         type="text" 
-                        id="city" 
-                        formControlName="city">
+                        id="senderCity" 
+                        formControlName="senderCity">
                     <span class="form__label-error-msg" 
                         *ngIf="(senderCity.touched && senderCity.hasError('required')) || (!senderCity.hasError('required') && (senderCity.hasError('minlength') || senderCity.hasError('invalidValue')))">
                         can't be empty
                     </span>
                 </label>
 
-                <label class="form__label form__bill-from-label" for="postCode">
+                <label class="form__label form__bill-from-label" for="senderPostCode">
                     Post Code
                     <input
                         appMinCharacters
@@ -58,11 +62,13 @@
                         appUppercase
                         class="form__input" 
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (senderPostCode.touched && senderPostCode.hasError('required')) || (!senderPostCode.hasError('required') && (senderPostCode.hasError('minlength') || senderPostCode.hasError('invalidValue'))),
                             'form__input-error': (senderPostCode.touched && senderPostCode.hasError('required')) || (!senderPostCode.hasError('required') && (senderPostCode.hasError('minlength') || senderPostCode.hasError('invalidValue')))
                         }"
                         type="text" 
-                        id="postCode" 
-                        formControlName="postCode">
+                        id="senderPostCode" 
+                        formControlName="senderPostCode">
                     <span 
                         class="form__label-error-msg"
                         *ngIf="senderPostCode.touched && senderPostCode.hasError('required')">
@@ -75,7 +81,7 @@
                     </span>
                 </label>
 
-                <label class="form__label form__bill-from-label" for="country">
+                <label class="form__label form__bill-from-label" for="senderCountry">
                     Country
                     <input 
                         appMinCharacters
@@ -83,11 +89,13 @@
                         [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (senderCountry.touched && senderCountry.hasError('required')) || (!senderCountry.hasError('required') && (senderCountry.hasError('minlength') || senderCountry.hasError('invalidValue'))),
                             'form__input-error': (senderCountry.touched && senderCountry.hasError('required')) || (!senderCountry.hasError('required') && (senderCountry.hasError('minlength') || senderCountry.hasError('invalidValue')))
                         }"
                         type="text" 
-                        id="country" 
-                        formControlName="country">
+                        id="senderCountry" 
+                        formControlName="senderCountry">
                     <span 
                         class="form__label-error-msg"
                         *ngIf="(senderCountry.touched && senderCountry.hasError('required')) || (!senderCountry.hasError('required') && (senderCountry.hasError('minlength') || senderCountry.hasError('invalidValue')))"
@@ -109,6 +117,8 @@
                         maxlength="20"
                         class="form__input"
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (clientName.touched && clientName.hasError('required')),
                             'form__input-error': clientName.touched && clientName.hasError('required')
                         }"
                         type="text" 
@@ -126,6 +136,8 @@
                         class="form__input"
                         appEmailValidator
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (clientEmail.touched && clientEmail.hasError('invalidEmail')),
                             'form__input-error': clientEmail.touched && clientEmail.hasError('invalidEmail')
                         }"
                         type="text" 
@@ -138,52 +150,60 @@
                     </span>
                 </label>
                 <ng-container formGroupName="clientAddress">
-                    <label class="form__label form__bill-to-label" for="street">
+                    <label class="form__label form__bill-to-label" for="clientStreet">
                         Street Address
                         <input
                             class="form__input"
                             type="text"
-                            id="street"
-                            formControlName="street">
+                            id="clientStreet"
+                            [ngClass]="{ 'light-input': isDarkThemeActive$ | async }"
+                            formControlName="clientStreet">
                     </label>
-                    <label class="form__label form__bill-to-label" for="city">
+                    <label class="form__label form__bill-to-label" for="clientCity">
                         City
                         <input
                             [mask]="textMask"
                             [patterns]="customPatterns"
                             class="form__input"
+                            [ngClass]="{ 'light-input': isDarkThemeActive$ | async }"
                             type="text"
-                            id="city"
-                            formControlName="city">
+                            id="clientCity"
+                            formControlName="clientCity">
                     </label>
-                    <label class="form__label form__bill-to-label" for="postCode">
+                    <label class="form__label form__bill-to-label" for="clientPostCode">
                         Post Code
                         <input
                             appUppercase
+                            appMinCharacters
                             maxlength="10"
                             class="form__input"
                             [ngClass]="{
-                                'form__input-error': (clientPostCode.touched && clientPostCode.hasError('required')) || (!clientPostCode.hasError('required') && (clientPostCode.hasError('minlength') || clientPostCode.hasError('invalidValue')))
+                                'light-input': isDarkThemeActive$ | async,
+                                'light-input-error': (isDarkThemeActive$ | async) && ((clientPostCode.hasError('minlength') || clientPostCode.hasError('invalidValue'))),
+                                'form__input-error': (clientPostCode.hasError('minlength') || clientPostCode.hasError('invalidValue'))
                             }"
                             type="text"
-                            id="postCode"
-                            formControlName="postCode">
+                            id="clientPostCode"
+                            formControlName="clientPostCode">
                         <span 
                             class="form__label-error-msg"
-                            *ngIf="(clientPostCode.touched && clientPostCode.hasError('required')) || (!clientPostCode.hasError('required') && (clientPostCode.hasError('minlength') || clientPostCode.hasError('invalidValue')))"
+                            *ngIf="(clientPostCode.hasError('minlength') || clientPostCode.hasError('invalidValue'))"
                             >
                             too short
                         </span>
                     </label>
-                    <label class="form__label form__bill-to-label" for="country">
+                    <label class="form__label form__bill-to-label" for="clientCountry">
                         Country
                         <input
                             [mask]="textMask"
                             [patterns]="customPatterns"
+                            [ngClass]="{
+                                'light-input': isDarkThemeActive$ | async
+                            }"
                             class="form__input"
                             type="text"
-                            id="country"
-                            formControlName="country">
+                            id="clientCountry"
+                            formControlName="clientCountry">
                     </label>
                 </ng-container>
                 
@@ -192,6 +212,8 @@
                     <input 
                         class="form__input"
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (createdAt.touched && createdAt.hasError('required')),
                             'form__input-error': createdAt.touched && createdAt.hasError('required')
                         }"
                         type="date" 
@@ -211,6 +233,8 @@
                     <select 
                         class="form__input select"
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (paymentTerms.touched && paymentTerms.hasError('required')),
                             'form__input-error': paymentTerms.touched && paymentTerms.hasError('required')
                         }"
                         id="paymentTerms" 
@@ -233,6 +257,8 @@
                         [patterns]="customPatterns"
                         class="form__input"
                         [ngClass]="{
+                            'light-input': isDarkThemeActive$ | async,
+                            'light-input-error': (isDarkThemeActive$ | async) && (description.touched && description.hasError('required')),
                             'form__input-error': description.touched && description.hasError('required')
                         }"
                         type="text" 
