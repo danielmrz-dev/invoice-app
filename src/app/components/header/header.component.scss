@@ -54,7 +54,7 @@
 
 @media screen and (min-width: 1024px) {
     .header {
-        height: 100vh;
+        min-height: 100vh;
         flex-direction: column;
         max-width: 77px;
         position: fixed;
