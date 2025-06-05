@@ -33,7 +33,7 @@
                     </span>
                 </label>
 
-                <label class="form__label form__bill-from-label" for="senderCity">
+                <label class="form__label form__bill-from-label" for="senderCity" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     City
                     <input
                         appMinCharacters
@@ -54,7 +54,7 @@
                     </span>
                 </label>
 
-                <label class="form__label form__bill-from-label" for="senderPostCode">
+                <label class="form__label form__bill-from-label" for="senderPostCode" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     Post Code
                     <input
                         appMinCharacters
@@ -81,7 +81,7 @@
                     </span>
                 </label>
 
-                <label class="form__label form__bill-from-label" for="senderCountry">
+                <label class="form__label form__bill-from-label" for="senderCountry" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     Country
                     <input 
                         appMinCharacters
@@ -109,7 +109,7 @@
         <div class="form__bill-to">
             <span class="form__section-title">Bill to</span>
             <div class="form__bill-to-inputs">
-                <label class="form__label form__bill-to-label" for="clientName">
+                <label class="form__label form__bill-to-label" for="clientName" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     Client's name
                     <input 
                         [mask]="textMask"
@@ -130,7 +130,7 @@
                         can't be empty
                     </span>
                 </label>
-                <label class="form__label form__bill-to-label" for="clientEmail">
+                <label class="form__label form__bill-to-label" for="clientEmail" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     Client's email
                     <input 
                         class="form__input"
@@ -150,7 +150,7 @@
                     </span>
                 </label>
                 <ng-container formGroupName="clientAddress">
-                    <label class="form__label form__bill-to-label" for="clientStreet">
+                    <label class="form__label form__bill-to-label" for="clientStreet" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                         Street Address
                         <input
                             class="form__input"
@@ -159,7 +159,7 @@
                             [ngClass]="{ 'light-input': isDarkThemeActive$ | async }"
                             formControlName="clientStreet">
                     </label>
-                    <label class="form__label form__bill-to-label" for="clientCity">
+                    <label class="form__label form__bill-to-label" for="clientCity" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                         City
                         <input
                             [mask]="textMask"
@@ -170,7 +170,7 @@
                             id="clientCity"
                             formControlName="clientCity">
                     </label>
-                    <label class="form__label form__bill-to-label" for="clientPostCode">
+                    <label class="form__label form__bill-to-label" for="clientPostCode" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                         Post Code
                         <input
                             appUppercase
@@ -192,7 +192,7 @@
                             too short
                         </span>
                     </label>
-                    <label class="form__label form__bill-to-label" for="clientCountry">
+                    <label class="form__label form__bill-to-label" for="clientCountry" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                         Country
                         <input
                             [mask]="textMask"
@@ -207,7 +207,7 @@
                     </label>
                 </ng-container>
                 
-                <label class="form__label form__bill-to-label" for="invoiceDate">
+                <label class="form__label form__bill-to-label" for="invoiceDate" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     Invoice date
                     <input 
                         class="form__input"
@@ -227,7 +227,7 @@
                         can't be empty
                     </span>
                 </label>
-                <label class="form__label form__bill-to-label" for="paymentTerms">
+                <label class="form__label form__bill-to-label" for="paymentTerms" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     Payment Terms
                     <img src="icon-arrow-down.svg" alt="">
                     <select 
@@ -250,7 +250,7 @@
                         can't be empty
                     </span>
                 </label>
-                <label class="form__label form__bill-to-label" for="description">
+                <label class="form__label form__bill-to-label" for="description" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                     Project description
                     <input
                         [mask]="textMask"
@@ -285,7 +285,7 @@
                 
                 <label 
                     class="form__label form__items-list-label" 
-                    for="item-{{ i }}">
+                    for="item-{{ i }}" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                         Item Name
                     <input
                         appMinCharacters
@@ -308,7 +308,7 @@
                     </span>
                 </label>
                 <div class="form__items-list-item-info">
-                    <label class="form__label" for="qty">
+                    <label class="form__label" for="qty" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                         Qty.
                         <input
                             appOnlyLetters
@@ -330,7 +330,7 @@
                             can't be 0
                         </span>
                     </label>
-                    <label class="form__label" for="price">
+                    <label class="form__label" for="price" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                         Price
                         <input
                             appOnlyLetters
@@ -351,7 +351,7 @@
                             can't be 0
                         </span>
                     </label>
-                    <label class="form__label" for="total">
+                    <label class="form__label" for="total" [ngClass]="{ 'semi-dark-text': isDarkThemeActive$ | async }">
                         Total
                         <input 
                             tabindex="-1" 
